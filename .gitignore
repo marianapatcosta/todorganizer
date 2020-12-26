@@ -1,0 +1,17 @@
+# React
+/frontend/node_modules
+/frontend/coverage
+/frontend/build
+/frontend/.env
+.vscode
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+Lib
+
+# Backup files # 
+*.bak 
