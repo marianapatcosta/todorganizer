@@ -39,15 +39,12 @@ export const StyledTodo = styled.li`
     `
       : ""}
 
-${({ isDragging }) =>
+  ${({ isDragging }) =>
     isDragging
-      ? `
-    
-color: "red";
-     
-        background: 'yellow';
-      
-    `
+      ? `    
+        color: "red";     
+        background: 'yellow';      
+      `
       : ""}
 `;
 
@@ -117,7 +114,7 @@ export const StyledTodoActions = styled.div`
   justify-content: center;
   align-items: center;
   cursor: default;
-  transition: all 0.2s linear;
+  transition: width 0.2s linear;
 
   ${({ showActions }) =>
     showActions

@@ -41,7 +41,7 @@ const Todo = ({
         priority:{" "}
         <StyledTodoPriority priority={todo.priority}>&nbsp;</StyledTodoPriority>{" "}
       </StyledTodoItem>
-      {isTodoBoard && (
+      {!isTodoBoard && (
         <StyledTodoItem>{`status: ${todo.status}`} </StyledTodoItem>
       )}
       <StyledTodoCheckbox
