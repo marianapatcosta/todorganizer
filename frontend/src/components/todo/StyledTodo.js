@@ -15,11 +15,11 @@ export const StyledTodo = styled.li`
   position: relative;
   list-style: none;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   padding: 10px;
-  background: ${({ theme }) => theme.colors.secondary};
+  background: ${({ theme }) => theme.colors.primary};
   font-size: 90%;
   box-sizing: border-box;
 
@@ -50,13 +50,13 @@ export const StyledTodo = styled.li`
 
 export const StyledTodoItem = styled.div`
   padding-bottom: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const StyledTodoTitle = styled(StyledTodoItem)`
   font-weight: 700;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 export const StyledTodoDescription = styled(StyledTodoItem)`
@@ -85,7 +85,7 @@ export const StyledTodoDescription = styled(StyledTodoItem)`
     width: 10px;
     height: 10px;
     margin-top: 10px;
-    background: ${({ theme }) => theme.colors.secondary};
+    background: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -101,7 +101,7 @@ export const StyledTodoPriority = styled.div`
 
 export const StyledTodoActions = styled.div`
   position: absolute;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.secondary};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;

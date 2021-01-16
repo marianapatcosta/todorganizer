@@ -56,7 +56,9 @@ export const fileTypes = {
   JPEG: ".jpeg",
   PNG: ".png",
   SVG: ".svg",
-  PDF: ".pdf"
+  PDF: ".pdf",
+  XLS: ".xls",
+  XLSX: ".xlsx",
 };
 
 export const documentOrientation = {

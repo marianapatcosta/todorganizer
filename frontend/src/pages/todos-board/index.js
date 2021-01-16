@@ -120,8 +120,8 @@ const TodosBoard = () => {
           };
   }
 
-    // in for loop: 1st, no need to set a variable; 2nd, check if el exists and is not document el; 3rd, each loop el is
-    // assigned to current element's parent, climbing up the DOM
+    // in for loop: 1st, no need to set a variable; 2nd, check if element exists and is not document element; 
+    // 3rd, each loop element is assigned to current element's parent, climbing up the DOM
     for (; element && element !== document; element = element.parentNode) {
       if (element.matches(statusIds.join())) return element.id;
     }

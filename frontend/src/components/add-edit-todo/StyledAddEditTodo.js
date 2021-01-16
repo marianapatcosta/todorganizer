@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { StyledCard } from "../card/StyledCard";;
+import Button from "../button";
+import Card from "../card";
 
-export const StyledAddEditTodo = styled(StyledCard)`
+export const StyledAddEditTodo = styled(Card)`
   width: 100%;
 `;
 
@@ -28,6 +29,10 @@ export const StyledFormItem = styled.div`
   margin-bottom: 15px;
 `;
 
+export const StyledFormButton = styled(Button)`
+  width: 100%;
+`;
+
 export const StyledFormCancel = styled.span`
   color: ${({ theme }) => theme.colors.red};
   font-size: 90%;
@@ -41,4 +46,3 @@ export const StyledFormCancel = styled.span`
     opacity: 0.5;
   }
 `;
-

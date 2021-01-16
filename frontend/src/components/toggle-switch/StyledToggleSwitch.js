@@ -13,8 +13,6 @@ export const StyledToggleSwitch = styled.div`
   ${({ label }) =>
     !!label
       ? `
-      display: flex;
-      align-items: center;
       width: auto;
         `
       : ""}
@@ -46,7 +44,6 @@ export const StyledToggleSwitchSlider = styled.span`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 34px;
   border: 1px solid ${({ theme }) => theme.colors.green};
   cursor: pointer;

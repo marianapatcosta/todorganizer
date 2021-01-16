@@ -11,12 +11,12 @@ const Header = ({ title, isDarkTheme, toggleThemeMode }) => {
     <StyledHeader>
       <StyledHeaderTitle>{title}</StyledHeaderTitle>
       <StyledHeaderToggle
-          label="theme"
-          leftLabel={<Emoji label="sun" emoji="☀️" />}
-          rightLabel={<Emoji label="moon" emoji="🌙" />}
-          checked={isDarkTheme}
-          handleToggle={toggleThemeMode}
-        />
+        label="theme"
+        leftLabel={<Emoji label="sun" emoji="☀️" />}
+        rightLabel={<Emoji label="moon" emoji="🌙" />}
+        checked={isDarkTheme}
+        handleToggle={toggleThemeMode}
+      />
     </StyledHeader>
   );
 };

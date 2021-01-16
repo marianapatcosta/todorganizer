@@ -15,13 +15,12 @@ const ToggleSwitch = ({
   handleToggle,
 }) => {
   return (
-    <StyledToggleSwitch className={className} onClick={handleToggle}>
-      {label && <StyledToggleSwitchLabel>{label}</StyledToggleSwitchLabel>}
+    <StyledToggleSwitch className={className} label={label} onClick={handleToggle}>
+      {label && <StyledToggleSwitchLabel disabled={disabled}>{label}</StyledToggleSwitchLabel>}
       <StyledToggleSwitchSlider disabled={disabled} checked={checked}>
         <StyledToggleSwitchLabel disabled={disabled}>
           {checked && leftLabel}
         </StyledToggleSwitchLabel>
-
         <StyledToggleSwitchLabel>{!checked && rightLabel}</StyledToggleSwitchLabel>
       </StyledToggleSwitchSlider>
     </StyledToggleSwitch>
