@@ -13,8 +13,7 @@ Simple ToDo desktop app developed using Electron, React and Django Rest Framewor
 # Local desktop app
 ## To run react app, in "Frontend" directory:
 ### Run "npm i" ou "yarn install" to install the required dependencies
-### Run "npm run start-electron" to run the desktop app  in dev mode or 
-  "npm run electron-dev" to concurrently run react app in the browser and electron
+### Run "npm run start-electron" to run the desktop app  in dev mode or "npm run electron-dev" to concurrently run react app in the browser and electron
 
 ## To run Django project,
 ### Run .\Scripts\activate in root directory to activate virtual environment
