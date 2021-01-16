@@ -2,6 +2,8 @@
 /frontend/node_modules
 /frontend/coverage
 /frontend/build
+/frontend/dist
+/frontend/dist-django
 /frontend/.env
 .vscode
 # Django #
@@ -13,6 +15,7 @@ db.sqlite3
 media
 Lib
 /backend/backend/.env
-
+build
+dist
 # Backup files # 
 *.bak 

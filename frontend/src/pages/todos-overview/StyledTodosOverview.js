@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Card, Dropdown, Export, Search } from "../../components";
 
 export const StyledTodosOverview = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin: 30px 0 15px;
 
   @media (min-width: 768px) {
     width: 90%;
@@ -16,28 +16,28 @@ export const StyledTodosOverview = styled.div`
   }
 `;
 
-export const StyledTodosList = styled.div`
+export const StyledTodosList = styled(Card)`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 60%;
   margin-top: 50px;
   box-sizing: border-box;
+  height: 517px;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     margin-top: 0;
-    width: 25%;
+    width: 30%;
   }
 `;
 
 export const StyledAddTodo = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
 
   @media (min-width: 768px) {
-    margin-left: 0;
-    margin-right: 100px;
     width: 55%;
     box-sizing: border-box;
   }
@@ -56,21 +56,20 @@ export const StyledTodosListHeaderTitle = styled.div`
   align-items: center;
 `;
 
-export const StyledTodosListHeaderBottom = styled.div`
+export const StyledTodosListHeaderBottom = styled(Card)`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  width: 100%;
   background-color: ${({ theme }) => theme.colors.secondary};
-  border-radius: 3px;
-  padding: 5px 0;
+  padding: 5px;
+  overflow: visible;
 `;
 
 export const StyledTodosListHeaderIcon = styled.img`
   width: 17px;
   height: 17px;
   padding: 10px 0;
-  margin-left: 25px;
+  margin-left: 10px;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
     brightness(92%) contrast(104%);
 
@@ -116,7 +115,16 @@ export const StyledTodosListSearch = styled(Search)`
   margin: 5px;
 `;
 
-export const StyledTodosListBody = styled.ul``;
+export const StyledTodosListBody = styled.ul`
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin-top: 15px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 export const StyledExport = styled(Export)`
   width: 40%;

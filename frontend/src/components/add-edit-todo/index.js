@@ -1,13 +1,19 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { ExcelRenderer } from "react-excel-renderer";
-import { Button, Checkbox, Dropdown, Input, Textarea, Upload } from "../";
-import { errorMessages, priorities, statuses } from "../../constants";
+import {  Checkbox, Dropdown, Input, Textarea, Upload } from "../";
+import {
+  errorMessages,
+  fileTypes,
+  priorities,
+  statuses,
+} from "../../constants";
 import {
   StyledAddEditTodo,
   StyledForm,
   StyledFormTitle,
   StyledFormTitleText,
   StyledFormItem,
+  StyledFormButton,
   StyledFormCancel,
 } from "./StyledAddEditTodo";
 
@@ -129,6 +135,7 @@ const AddEditTodo = ({
             <div>
               <Upload
                 label="Upload"
+                fileTypes={`${fileTypes.CSV}, ${fileTypes.XLS}, ${fileTypes.XLSX}`}
                 onUpload={onFileUpload}
               />
             </div>
@@ -191,9 +198,11 @@ const AddEditTodo = ({
               label={"is completed?"}
             />
           </StyledFormItem>
-          <StyledFormItem>
-            <Button type="submit" label={"Save"} large={true} />
-          </StyledFormItem>
+          <StyledFormButton
+            type="submit"
+            label={"Save"}
+            large={true}
+          ></StyledFormButton>
         </StyledForm>
       </StyledAddEditTodo>
     </Fragment>
