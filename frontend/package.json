@@ -12,7 +12,6 @@
     "cra-template": "1.0.3",
     "electron-is-dev": "^1.2.0",
     "electron-log": "^4.3.1",
-    "electron-packager": "^15.2.0",
     "html-to-image": "^1.3.20",
     "jspdf": "^2.2.0",
     "react": "^16.13.1",
@@ -31,8 +30,7 @@
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-build": "electron-builder",
     "release": "npm run react-build && electron-builder --publish=always",
-    "build": "npm run react-build && npm run electron-build",
-    "electron-build-win": "electron-packager . --platform=win32 --out=\"build\" --overwrite --icon=\"public/node.png\""
+    "build": "npm run react-build && npm run electron-build"
   },
   "eslintConfig": {
     "extends": "react-app"
