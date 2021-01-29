@@ -29,7 +29,7 @@ const App = () => {
   {
     label: "Board",
     renderContent: () => <TodosBoard />
-  }]
+  }];
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>

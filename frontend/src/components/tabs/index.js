@@ -26,11 +26,10 @@ const Tabs = ({ disabled, tabsMetadata, className }) => {
     <StyledTabs className={className}>
       <StyledTabsListWrapper>
         <StyledTabsList disabled={disabled}>
-          {tabsMetadata.map(({ label, renderContent }, index) => (
+          {tabsMetadata.map(({ label }, index) => (
             <Tab
-              key={index * Math.random()}
+              key={index + Math.random()}
               label={label}
-              renderContent={renderContent}
               isActive={index === activeTabIndex}
               onClick={() => onClickTab(index)}
             />
