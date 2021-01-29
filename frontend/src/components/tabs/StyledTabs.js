@@ -20,6 +20,19 @@ export const StyledTabsList = styled.ul`
   padding: 10px 20px 0;
   // border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
   box-shadow: 0 4px 8px -8px ${({ theme }) => theme.colors.shadow};
+  
+  ${({ disabled }) =>
+    disabled
+      ? `
+      background-color: ${({ theme }) => theme.colors.disabled};
+      opacity: 0.3;
+      pointer-events: none;
+
+      &:hover {  
+        cursor: default;
+      }
+    `
+      : ""}
 `;
 
 export const StyledTabsContent = styled.div``;
