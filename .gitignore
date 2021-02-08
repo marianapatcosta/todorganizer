@@ -6,6 +6,9 @@
 /frontend/dist-django
 /frontend/.env
 .vscode
+/frontend/__snapshots
+*.test.js
+*__snapshots__/
 # Django #
 *.log
 *.pot

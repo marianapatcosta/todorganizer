@@ -18,6 +18,10 @@ export const StyledSearch = styled.input`
   position: relative;
   height: 30px;
 
+  :focus {
+    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+  }
+
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus,
@@ -44,7 +48,7 @@ export const StyledSearchIcon = styled.img`
 `;
 
 export const StyledMoStyledSearchIconClear = styled.span`
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   position: absolute;
   width: 15px;
   height: 15px;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Tick } from "../../assets/icons";
+import { isEventValid } from "../../utils";
 import {
   StyledCheckbox,
   StyledCheckboxToggle,
@@ -7,17 +8,18 @@ import {
   StyledCheckboxLabel,
 } from "./StyledCheckbox";
 
-const Checkbox = ({ onClick, checked, disabled, label, className }) => {
+const Checkbox = ({ onChange, checked, name, disabled, label, className }) => {
+  const handleCheckboxClick = (event) => isEventValid(event) && onChange();
+
   return (
     <StyledCheckbox>
-      <StyledCheckboxLabel
-        className={className}
+      <StyledCheckboxToggle
+        role="checkbox"
+        tabIndex={disabled ? -1 : 0}
         disabled={disabled}
-        onClick={onClick}
+        onClick={handleCheckboxClick}
+        onKeyDown={handleCheckboxClick}
       >
-        {label}
-      </StyledCheckboxLabel>
-      <StyledCheckboxToggle disabled={disabled} onClick={onClick}>
         {checked && (
           <StyledCheckboxToggleTick
             alt="checkbox tick"
@@ -25,6 +27,14 @@ const Checkbox = ({ onClick, checked, disabled, label, className }) => {
           ></StyledCheckboxToggleTick>
         )}
       </StyledCheckboxToggle>
+      <StyledCheckboxLabel
+        className={className}
+        htmlFor={name || label}
+        disabled={disabled}
+        onClick={handleCheckboxClick}
+      >
+        {label}
+      </StyledCheckboxLabel>
     </StyledCheckbox>
   );
 };

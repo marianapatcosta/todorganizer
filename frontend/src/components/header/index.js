@@ -15,7 +15,7 @@ const Header = ({ title, isDarkTheme, toggleThemeMode }) => {
         leftLabel={<Emoji label="sun" emoji="☀️" />}
         rightLabel={<Emoji label="moon" emoji="🌙" />}
         checked={isDarkTheme}
-        handleToggle={toggleThemeMode}
+        onChange={toggleThemeMode}
       />
     </StyledHeader>
   );

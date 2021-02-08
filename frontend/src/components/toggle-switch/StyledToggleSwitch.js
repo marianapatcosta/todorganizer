@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const StyledToggleSwitch = styled.div`
+export const StyledToggleSwitch = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
   height: auto;
   width: 55px;
   font-size: 95%;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   font-style: italic;
 
   ${({ label }) =>
@@ -15,6 +15,16 @@ export const StyledToggleSwitch = styled.div`
       ? `
       width: auto;
         `
+      : ""}
+
+  ${({ disabled, theme  }) =>
+    disabled
+      ? `
+      color: ${theme.colors.disabled};
+      :hover {
+        cursor: default;
+      }
+    `
       : ""}
 `;
 
@@ -29,10 +39,10 @@ export const StyledToggleSwitchLabel = styled.span`
     cursor: pointer;
   }
 
-  ${({ disabled }) =>
+  ${({ disabled, theme }) =>
     disabled
       ? `
-      color: ${({ theme }) => theme.colors.disabled};
+      color: ${theme.colors.disabled};
       :hover {
         cursor: default;
       }
@@ -45,7 +55,7 @@ export const StyledToggleSwitchSlider = styled.span`
   justify-content: space-between;
   align-items: flex-end;
   border-radius: 34px;
-  border: 1px solid ${({ theme }) => theme.colors.green};
+  border: 1px solid ${({ theme }) => theme.colors.highlight};
   cursor: pointer;
   height: 18px;
   width: 38px;
@@ -54,6 +64,7 @@ export const StyledToggleSwitchSlider = styled.span`
   padding: 2px;
   transition: 0.4s;
   -webkit-transition: 0.4s;
+  margin-left: 0.5rem;
 
   :hover {
     opacity: 0.75;
@@ -75,17 +86,16 @@ export const StyledToggleSwitchSlider = styled.span`
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-
   }
 
-  ${({ disabled }) =>
+  ${({ disabled, theme }) =>
     disabled
       ? `
-      border:  1px solid ${({ theme }) => theme.colors.disabled};
+      border:  1px solid ${theme.colors.disabled};
       opacity: 0.3;
       pointer-events: none;
       :before {
-        background-color: ${({ theme }) => theme.colors.disabled};
+        background-color: ${ theme.colors.disabled};
         opacity: 0.8;
       }
 
@@ -95,14 +105,28 @@ export const StyledToggleSwitchSlider = styled.span`
      `
       : ""}
 
-  ${({ checked }) =>
+  ${({ checked, theme }) =>
     checked
       ? `
-      background-color: ${({ theme }) => theme.colors.secondary};
+      background-color: ${theme.colors.secondary};
       :before {
         opacity: 1;
         transform: translateX(23px);
       }
     `
       : ""}
+`;
+
+export const StyledToggleInput = styled.input`
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  // when focus, adds a border to its sibling StyledCheckboxToggle
+  :focus + ${StyledToggleSwitchSlider} {
+    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+  }
+
+  :focus:not(:focus-visible) + ${StyledToggleSwitchSlider} {
+    outline: none;
+  }
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useReducer, useRef, Fragment } from "react";
 import { CSVLink } from "react-csv";
 import { toPng, toJpeg, toSvg } from "html-to-image";
 import { jsPDF } from "jspdf";
@@ -8,16 +8,12 @@ import {
   fileTypes,
 } from "../../constants";
 import {
-  StyledExport,
-  StyledExportOptions,
-  StyledExportOption,
-  StyledExportWrapper,
+  StyledExport
 } from "./StyledExport";
 
 const Export = ({
   className,
   exportOptions,
-  label,
   disabled,
   backgroundColor,
   csvData,
@@ -29,11 +25,6 @@ const Export = ({
   onError = () => null,
 }) => {
   const exportCsvRef = useRef();
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [exportOptionsToDisplay, setExportOptionsToDisplay] = useState([]);
-
-  const toggleExpansion = () =>
-    setIsExpanded((prevIsExpanded) => !prevIsExpanded);
 
   const onExportError = (fileType) => {
     onError(`It was not possible to export ${fileType} file.`);
@@ -135,45 +126,54 @@ const Export = ({
     },
   ];
 
-  const onOptionClick = (onExport) => {
-    toggleExpansion();
-    onExport();
+  const onChooseOption = (onExport) => onExport();
+
+  // for Dropdown Native
+  /*   const onChooseOption = (chosenItemLabel) => {
+    const chosenItem = exportOptionsToDisplay.find(option => option.label === chosenItemLabel); 
+    chosenItem.onExport();
+  }; */
+
+  const optionsReducer = (state, action) => {
+    switch (action.type) {
+      case "update":
+        return options.filter(({ label }) => exportOptions.includes(label));
+      default:
+        return [];
+    }
   };
+  const [exportOptionsToDisplay, dispatchExportOptionsToDisplay] = useReducer(
+    optionsReducer,
+    []
+  );
 
   useEffect(() => {
-    setExportOptionsToDisplay(
-      options.filter(({ label }) => exportOptions.includes(label))
-    );
+    dispatchExportOptionsToDisplay({type: 'update'})
   }, []);
 
   return (
-    <StyledExportWrapper className={className}>
+    <Fragment>
       <StyledExport
-        label={label}
+        className={className}
+        options={exportOptionsToDisplay}
+        optionKey="label"
+        placeholder={"Export"}
         disabled={disabled}
-        onClick={toggleExpansion}
-      ></StyledExport>
-      {isExpanded && (
-        <StyledExportOptions>
-          {exportOptionsToDisplay.map(({ label, onExport }, index) => (
-            <StyledExportOption
-              key={index * Math.random()}
-              onClick={() => onOptionClick(onExport)}
-            >
-              {label}
-            </StyledExportOption>
-          ))}
-        </StyledExportOptions>
-      )}
+        onChooseOption={(chosenItem) => onChooseOption(chosenItem.onExport)}
+        // for Dropdown Native
+        // onChooseOption={onChooseOption}
+      />
       {exportOptions.includes(fileTypes.CSV) && (
         <CSVLink
+          aria-hidden="true"
+          style={{ visibility: "hidden" }}
           ref={exportCsvRef}
           data={csvData}
           filename={`${fileName}${fileTypes.CSV}`}
           target="_blank"
         />
       )}
-    </StyledExportWrapper>
+    </Fragment>
   );
 };
 

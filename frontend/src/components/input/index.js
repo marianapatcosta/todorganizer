@@ -5,6 +5,7 @@ const Input = ({
   id,
   label,
   type,
+  autoComplete = 'off',
   maxLength,
   value,
   placeholder,
@@ -26,6 +27,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        autoComplete={autoComplete}
         >
       </StyledInput>
       {!!errorText && <StyledInputError>{errorText}</StyledInputError>}

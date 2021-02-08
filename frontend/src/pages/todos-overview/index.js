@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import {
   StyledTodosOverview,
   StyledTodosList,
   StyledTodosListHeader,
+  StyledTodosListHeaderTop,
   StyledTodosListHeaderTitle,
   StyledTodosListHeaderBottom,
   StyledTodosListHeaderOrder,
@@ -31,6 +32,7 @@ import {
   statusConverter,
 } from "../../constants";
 import { Delete } from "../../assets/icons";
+import { isEventValid } from "../../utils";
 
 const TodosOverview = () => {
   const [todos, setTodos] = useState([]);
@@ -52,23 +54,25 @@ const TodosOverview = () => {
   }, []);
 
   useEffect(() => {
-    fetchTodos();
-  }, [order, orderBy, search]);
-
-  useEffect(() => {
     localStorage.setItem("order", order);
   }, [order]);
 
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/todos?search=${search}&ordering=${
-          order === orderOptions.DESC ? `-` : ""
+          order === orderOptions.DESC ? '-' : ""
         }${orderBy.key}`
       );
       const responseData = await response.json();
-      setTodos(responseData.map(todo => ({...todo, priority: priorityConverter[todo.priority], status: statusConverter[todo.status]})));
+      setTodos(
+        responseData.map((todo) => ({
+          ...todo,
+          priority: priorityConverter[todo.priority],
+          status: statusConverter[todo.status],
+        }))
+      );
     } catch (error) {
       setToastData({
         message: "It was not possible to load your ToDos.",
@@ -77,7 +81,11 @@ const TodosOverview = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [order, orderBy, search]);
+
+  useEffect(() => {
+    fetchTodos();
+  }, [fetchTodos, order, orderBy, search]);
 
   const onAddEditTodo = async (todo, customizedMessage) => {
     try {
@@ -123,10 +131,13 @@ const TodosOverview = () => {
 
   const onEditTodo = (todo) => setTodoToEdit(todo);
 
-  const onDeleteTodo = (todo = undefined) => {
-    setTodoToDelete(todo);
+  const onDeleteTodo = (todo) => {
+    !!todo && setTodoToDelete(todo);
     setShowModal(true);
   };
+
+  const handleDeleteAllTodos = (event) =>
+    isEventValid(event) && setShowModal(true);
 
   const deleteTodo = async () => {
     try {
@@ -197,12 +208,14 @@ const TodosOverview = () => {
     if (isLoading) {
       return new Array(5)
         .fill()
-        .map((item, index) => <TodoPlaceholder key={index * Math.random()} />);
+        .map((item, index) => (
+          <TodoPlaceholder key={`todo-placeholder-${index + Math.random()}`} />
+        ));
     }
     return !!todos.length ? (
       todos.map((todo, index) => (
         <Todo
-          key={index * Math.random()}
+          key={`todo-${index + Math.random()}`}
           todo={todo}
           onEditTodo={() => onEditTodo(todo)}
           onDeleteTodo={() => onDeleteTodo(todo)}
@@ -225,13 +238,19 @@ const TodosOverview = () => {
       </StyledAddTodo>
       <StyledTodosList>
         <StyledTodosListHeader>
-          <StyledTodosListHeaderTitle>
-            ToDos
-            <StyledTodosListHeaderIcon
-              src={Delete}
-              alt="Delete icon"
-              onClick={() => onDeleteTodo()}
-            />
+          <StyledTodosListHeaderTop>
+            <StyledTodosListHeaderTitle>
+              ToDos
+              <StyledTodosListHeaderIcon
+                aria-label="Delete all todos"
+                role="button"
+                tabIndex="0"
+                src={Delete}
+                alt="Delete icon"
+                onClick={handleDeleteAllTodos}
+                onKeyDown={handleDeleteAllTodos}
+              />
+            </StyledTodosListHeaderTitle>
             <StyledExport
               label="Export"
               exportOptions={`${fileTypes.CSV}, ${fileTypes.PDF}, ${fileTypes.JPEG}`}
@@ -240,22 +259,26 @@ const TodosOverview = () => {
               fileName={"my-todos"}
               onError={onExportError}
             />
-          </StyledTodosListHeaderTitle>
+          </StyledTodosListHeaderTop>
           <StyledTodosListHeaderBottom>
             <StyledTodosListSearch
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(event) => setSearch(event.target.value)}
               onClear={() => setSearch("")}
             ></StyledTodosListSearch>
             <StyledTodosListHeaderOrder>
               <StyledTodosListDropdown
                 options={Object.values(orderByOptions)}
                 selectedOption={orderBy}
-                labelKey={"label"}
-                title={"Order by"}
-                onOptionClick={(clickedItem) => updateOrderBy(clickedItem)}
+                optionKey={"label"}
+                label={"Order by"}
+                onChooseOption={(clickedItem) => updateOrderBy(clickedItem)}
               ></StyledTodosListDropdown>
-              <StyledTodosListOrder onClick={toggleOrder}>
+              <StyledTodosListOrder
+                role="button"
+                tabIndex="0"
+                onClick={toggleOrder}
+              >
                 {order === orderOptions.ASC
                   ? orderOptions.DESC
                   : orderOptions.ASC}

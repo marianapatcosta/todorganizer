@@ -9,6 +9,7 @@ export default {
     green: "#008000",
     yellow: "#f5d252",
     grey: "grey",
-    shadow: "#000000"
+    shadow: "#000000",
+    highlight: "#008000",
   },
 };

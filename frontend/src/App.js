@@ -18,18 +18,16 @@ const App = () => {
     localStorage.setItem("darkTheme", isDarkTheme);
   }, [isDarkTheme]);
 
-  const toggleThemeMode = () => {
-    setDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
-  };
-
-  const tabsMetadata = [{
-    label: "Overview",
-    renderContent: () => <TodosOverview />
-  },
-  {
-    label: "Board",
-    renderContent: () => <TodosBoard />
-  }];
+  const tabsMetadata = [
+    {
+      label: "Overview",
+      renderContent: () => <TodosOverview />,
+    },
+    {
+      label: "Board",
+      renderContent: () => <TodosBoard />,
+    },
+  ];
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
@@ -39,12 +37,12 @@ const App = () => {
         <Header
           title={"ToDOrganizer"}
           isDarkTheme={isDarkTheme}
-          toggleThemeMode={toggleThemeMode}
+          toggleThemeMode={event => setDarkTheme(event.target.checked)}
         />
-        <Tabs tabsMetadata={tabsMetadata} />
+        <Tabs tabsMetadata={tabsMetadata} tabsPurpose="separator" />
       </StyledApp>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

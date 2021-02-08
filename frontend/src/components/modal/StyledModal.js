@@ -63,7 +63,7 @@ export const StyledModalHeaderClose = styled.button`
 export const StyledModalMessage = styled.p`
   padding: 10px;
   text-align: center;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
 `;
 
 export const StyledModalFooter = styled.footer`

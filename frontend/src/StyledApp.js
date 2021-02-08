@@ -30,4 +30,14 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  
+  * :focus {
+    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+  }
+
+  * :focus:not(:focus-visible) {
+    border-color: ${({theme})=> theme.colors.green};
+    outline: none;
+  }
+
 `;

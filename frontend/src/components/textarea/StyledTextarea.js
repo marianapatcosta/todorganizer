@@ -18,6 +18,10 @@ export const StyledTextarea = styled.textarea`
   position: relative;
   resize: none;
 
+  :focus {
+    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+  }
+
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus,
@@ -33,7 +37,7 @@ export const StyledTextarea = styled.textarea`
 
 export const StyledLabel = styled.label`
   display: block;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   margin-bottom: 5px;
   margin-left: 5px;
   font-size: 95%;

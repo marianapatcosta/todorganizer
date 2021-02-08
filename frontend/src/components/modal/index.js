@@ -51,7 +51,7 @@ const Modal = ({
         <StyledModalContent ref={modalRef}>
           <StyledModalHeader>
             <StyledModalHeaderTitle>{header}</StyledModalHeaderTitle>
-            <StyledModalHeaderClose type="button" onClick={onClose}>
+            <StyledModalHeaderClose aria-label="close modal" onClick={onClose}>
               <span aria-hidden="true">x</span>
             </StyledModalHeaderClose>
           </StyledModalHeader>

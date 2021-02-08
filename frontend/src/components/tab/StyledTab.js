@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledTab = styled.li`
   min-width: 50px;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   padding: 5px 10px;
   position: relative;
 

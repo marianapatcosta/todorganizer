@@ -13,13 +13,16 @@ const Search = ({ className, value, onChange, onClear }) => {
       <StyledSearch
         maxLength={150}
         placeholder="Search"
+        type="search"
         value={value}
         onChange={onChange}
       ></StyledSearch>
       {!value ? (
         <StyledSearchIcon alt="magnifier icon" src={MagnifyingGlass} />
       ) : (
-        <StyledMoStyledSearchIconClear onClick={onClear} >x</StyledMoStyledSearchIconClear>
+        <StyledMoStyledSearchIconClear onClick={onClear}>
+          x
+        </StyledMoStyledSearchIconClear>
       )}
     </StyledSearchWrapper>
   );

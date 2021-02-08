@@ -19,15 +19,17 @@ export const StyledDropdown = styled.div`
   position: relative;
 `;
 
-export const StyledDropdownLabel = styled.div`
+export const StyledDropdownLabel = styled.label`
   display: block;
   color: ${({ theme }) => theme.colors.green};
   margin: 0 10px 5px 5px;
   font-size: 95%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   ${({ disabled, theme }) =>
-     `      color: ${disabled
-      ? theme.colors.disabled : ""};
+    `      color: ${disabled ? theme.colors.disabled : ""};
     `}
 `;
 
@@ -42,9 +44,13 @@ export const StyledDropdownHeader = styled.div`
   font-size: 95%;
   width: auto;
   position: relative;
-  
+
   :hover {
     cursor: pointer;
+  }
+
+  :focus {
+    outline: 2px solid ${({ theme }) => theme.colors.highlight};
   }
 
   ${({ disabled }) =>
@@ -60,10 +66,11 @@ export const StyledDropdownHeader = styled.div`
 `;
 
 export const StyledDropdownHeaderText = styled.div`
-  margin-right: 5px; 
+width: 90%;
+  margin-right: 5px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 `;
 
 export const StyledDropdownHeaderArrow = styled.img`
@@ -103,10 +110,24 @@ export const StyledDropdownOptions = styled.ul`
 export const StyledDropdownOption = styled.li`
   padding: 10px 5px;
   box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   :hover {
     cursor: pointer;
     background-color: ${({ theme }) => theme.colors.secondary};
   }
+
+  :focus {
+    background-color: ${({ theme }) => theme.colors.secondary};
+  }
+
+  ${({ isFocused, theme }) =>
+    isFocused
+      ? `
+      background-color: ${theme.colors.secondary};
+    `
+      : ""}
 
   ${({ isActive }) =>
     isActive
