@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef, useEffect } from "react";
 import {
   StyledTodo,
   StyledTodoItem,
@@ -7,66 +7,102 @@ import {
   StyledTodoPriority,
   StyledTodoActions,
   StyledTodoActionsIcon,
-  StyledTodoCheckbox,
+  StyledTodoItemCompleted,
+  StyledTodoContent,
+  StyledTodoItems,
 } from "./StyledTodo";
 import { Delete, Edit } from "../../assets/icons";
+import { isEventValid } from "../../utils";
+import { KEYBOARD_CODES } from "../../constants";
 
 const Todo = ({
   todo,
   isTodoBoard = false,
+  isDragging,
   onEditTodo,
   onDeleteTodo,
   onDragStart,
+  onBlur
 }) => {
   const [showActions, setShowActions] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
+  const { title, description, priority, status, is_completed } = todo;
+  const todoRef = useRef();
 
-  const dragStart = (e) => {
-    setIsDragging(true);
-    onDragStart(e);
+  const handleEditTodo = (event) => isEventValid(event) && onEditTodo();
+
+  const handleDeleteTodo = (event) => isEventValid(event) && onDeleteTodo();
+
+  const handleOnKeyDown = (event) => {
+    if (event.which === KEYBOARD_CODES.ESCAPE_KEY) onBlur();
+    if (isTodoBoard && isEventValid(event)) {
+      onDragStart(event);
+    }
   };
+
+  useEffect(() => {
+    isDragging && todoRef.current.focus();
+  });
 
   return (
     <StyledTodo
       draggable={isTodoBoard}
-      onDragStart={dragStart}
+      tabIndex={isTodoBoard ? 0 : -1}
+      aria-label={
+        isDragging
+          ? `todo ${title} - Selected`
+          : `todo ${title} - Press Space or Enter to select`
+      }
+      onDragStart={onDragStart}
       isTodoBoard={isTodoBoard}
-      isDragging={isDragging}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
+      onKeyDown={handleOnKeyDown}
+      ref={todoRef}
+      onBlur={onBlur}
     >
-      <StyledTodoTitle>{todo.title} </StyledTodoTitle>
-      <StyledTodoDescription>{todo.description} </StyledTodoDescription>
-      <StyledTodoItem>
-        priority:{" "}
-        <StyledTodoPriority priority={todo.priority}>&nbsp;</StyledTodoPriority>{" "}
-      </StyledTodoItem>
-      {!isTodoBoard && (
-        <StyledTodoItem>{`status: ${todo.status}`} </StyledTodoItem>
-      )}
-      <StyledTodoCheckbox
-        checked={todo.is_completed}
-        label={"is completed?"}
-        disabled={true}
-      />
-      {!isTodoBoard && (
-        <StyledTodoActions showActions={showActions}>
-          {showActions && (
-            <Fragment>
-              <StyledTodoActionsIcon
-                src={Edit}
-                alt="Edit icon"
-                onClick={onEditTodo}
-              />
-              <StyledTodoActionsIcon
-                src={Delete}
-                alt="Delete icon"
-                onClick={onDeleteTodo}
-              />
-            </Fragment>
+      <StyledTodoContent>
+        {is_completed && (
+          <StyledTodoItemCompleted>DONE</StyledTodoItemCompleted>
+        )}
+        <StyledTodoItems>
+          <StyledTodoTitle>{title} </StyledTodoTitle>
+          <StyledTodoDescription>{description} </StyledTodoDescription>
+          <StyledTodoItem>
+            priority:
+            <StyledTodoPriority priority={priority}>&nbsp;</StyledTodoPriority>
+          </StyledTodoItem>
+          {!isTodoBoard && (
+            <StyledTodoItem>{`status: ${status}`} </StyledTodoItem>
           )}
-        </StyledTodoActions>
-      )}
+
+          {!isTodoBoard && (
+            <StyledTodoActions showActions={showActions}>
+              {showActions && (
+                <Fragment>
+                  <StyledTodoActionsIcon
+                    aria-label="Edit todo"
+                    role="button"
+                    tabIndex="0"
+                    src={Edit}
+                    alt="Edit todo"
+                    onClick={handleEditTodo}
+                    onKeyDown={handleEditTodo}
+                  />
+                  <StyledTodoActionsIcon
+                    aria-label="Delete todo"
+                    role="button"
+                    tabIndex="0"
+                    src={Delete}
+                    alt="Delete icon"
+                    onClick={handleDeleteTodo}
+                    onKeyDown={handleDeleteTodo}
+                  />
+                </Fragment>
+              )}
+            </StyledTodoActions>
+          )}
+        </StyledTodoItems>
+      </StyledTodoContent>
     </StyledTodo>
   );
 };

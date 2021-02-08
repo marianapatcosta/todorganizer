@@ -1,17 +1,3 @@
-/* export const priorities = {
-  LOW: { key: 1, label: "low" },
-  MEDIUM: { key: 2, label: "medium" },
-  HIGH: { key: 3, label: "high" },
-};
-
-export const statuses = {
-  BACKLOG: { key: 1, label: "backlog" },
-  READY: { key: 2, label: "ready to do" },
-  ON_GOING: { key: 3, label: "on going" },
-  REVIEW: { key: 4, label: "review" },
-  CLOSED: { key: 5, label: "closed" },
-}; */
-
 export const priorities = {
   LOW: "low",
   MEDIUM: "medium",
@@ -63,14 +49,14 @@ export const fileTypes = {
 
 export const documentOrientation = {
   LANDSCAPE: "landscape",
-  VERTICAL: "vertical"
-}
+  VERTICAL: "vertical",
+};
 
 export const documentFormat = {
   A4: "A4",
   A3: "A3",
-  FourByTwo: [4, 2]
-}
+  FourByTwo: [4, 2],
+};
 
 export const priorityConverter = {
   1: priorities.LOW,
@@ -86,3 +72,12 @@ export const statusConverter = {
   5: statuses.CLOSED,
 };
 
+export const KEYBOARD_CODES = {
+  ENTER_KEY: 13,
+  ESCAPE_KEY: 27,
+  SPACE_KEY: 32,
+  LEFT_ARROW_KEY: 37,
+  UP_ARROW_KEY: 38,
+  RIGHT_ARROW_KEY: 39,
+  DOWN_ARROW_KEY: 40,
+};

@@ -28,7 +28,7 @@ export const StyledTodosBoardItem = styled(Card)`
 
 export const StyledTodosBoardItemTitle = styled.div`
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   margin-bottom: 10px;
 `;
 

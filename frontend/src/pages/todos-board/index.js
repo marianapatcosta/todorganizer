@@ -8,6 +8,7 @@ import {
   documentFormat,
   priorityConverter,
   statusConverter,
+  KEYBOARD_CODES,
 } from "../../constants";
 import {
   StyledTodosBoardWrapper,
@@ -19,7 +20,15 @@ import {
   StyledTodosBoardToast,
   StyledExport,
 } from "./StyledTodosBoard";
-
+const {
+  SPACE_KEY,
+  ENTER_KEY,
+  DOWN_ARROW_KEY,
+  UP_ARROW_KEY,
+  LEFT_ARROW_KEY,
+  RIGHT_ARROW_KEY,
+  ESCAPE_KEY,
+} = KEYBOARD_CODES;
 const TodosBoard = () => {
   const [todos, setTodos] = useState([]);
   const [draggedTodo, setDraggedTodo] = useState();
@@ -38,7 +47,13 @@ const TodosBoard = () => {
         `${process.env.REACT_APP_BACKEND_URL}/todos`
       );
       const responseData = await response.json();
-      setTodos(responseData.map(todo => ({...todo, priority: priorityConverter[todo.priority], status: statusConverter[todo.status]})));
+      setTodos(
+        responseData.map((todo) => ({
+          ...todo,
+          priority: priorityConverter[todo.priority],
+          status: statusConverter[todo.status],
+        }))
+      );
     } catch (error) {
       setToastData({
         message: "It was not possible to load your ToDos.",
@@ -49,7 +64,10 @@ const TodosBoard = () => {
     }
   };
 
-  const onEditTodo = async (newTodoStatus) => {
+  const onEditTodo = async (
+    newTodoStatus,
+    onFinishEditingTodo = () => null
+  ) => {
     if (!newTodoStatus || newTodoStatus === draggedTodo.status) return;
 
     try {
@@ -68,6 +86,10 @@ const TodosBoard = () => {
       );
 
       if (!response.ok) {
+        setToastData({
+          message: `It was not possible to update ToDo ${draggedTodo.title}.`,
+          type: toastTypes.ALERT,
+        });
         throw new Error();
       }
       setToastData({
@@ -81,23 +103,23 @@ const TodosBoard = () => {
         type: toastTypes.ALERT,
       });
     } finally {
-      setDraggedTodo();
+      onFinishEditingTodo();
     }
   };
 
-  const getFilteredTodos = (filter) =>
+  const getTodosPerStatus = (filter) =>
     todos.filter(({ status }) => status === filter);
 
-  const onDragOver = (e) => e.preventDefault();
+  const onDragOver = (event) => event.preventDefault();
 
-  const onDrop = (e) => {
-    e.preventDefault();
-    const targetStatusId = getTargetStatusId(e.target);
+  const onDrop = (event) => {
+    event.preventDefault();
+    const targetStatusId = getTargetStatusId(event.target);
     const newTodoStatus = targetStatusId && targetStatusId.split("-").join(" ");
-    onEditTodo(newTodoStatus);
+    onEditTodo(newTodoStatus, () => setDraggedTodo());
   };
 
-  const onDragStart = (e, todo) => setDraggedTodo(todo);
+  const onDragStart = (event, todo) => setDraggedTodo(todo);
 
   const getTargetStatusId = (element) => {
     const statusIds = Object.values(statuses).map(
@@ -107,26 +129,78 @@ const TodosBoard = () => {
     // polyfill for browsers that do not support Element.matches() or Element.matchesSelector() but support document.querySelectorAll()
     if (!Element.prototype.matches) {
       Element.prototype.matches =
-          Element.prototype.matchesSelector ||
-          Element.prototype.mozMatchesSelector ||
-          Element.prototype.msMatchesSelector ||
-          Element.prototype.oMatchesSelector ||
-          Element.prototype.webkitMatchesSelector ||
-          function(s) {
-              const matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                  i = matches.length;
-              while (--i >= 0 && matches.item(i) !== this) {}
-              return i > -1;
-          };
-  }
+        Element.prototype.matchesSelector ||
+        Element.prototype.mozMatchesSelector ||
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.oMatchesSelector ||
+        Element.prototype.webkitMatchesSelector ||
+        function (s) {
+          const matches = (
+            this.document || this.ownerDocument
+          ).querySelectorAll(s);
+          let i = matches.length;
+          while (--i >= 0 && matches.item(i) !== this) {}
+          return i > -1;
+        };
+    }
 
-    // in for loop: 1st, no need to set a variable; 2nd, check if element exists and is not document element; 
+    // in for loop: 1st, no need to set a variable; 2nd, check if element exists and is not document element;
     // 3rd, each loop element is assigned to current element's parent, climbing up the DOM
     for (; element && element !== document; element = element.parentNode) {
       if (element.matches(statusIds.join())) return element.id;
     }
     return null;
   };
+
+  const onKeyDown = (event) => {
+    event.stopPropagation();
+    if (!draggedTodo) return;
+    const statusOptions = Object.values(statuses);
+    const currentStatusIndex = statusOptions.findIndex(
+      (status) => status === draggedTodo.status
+    );
+    let newStatusIndex;
+    switch (event.which) {
+      case DOWN_ARROW_KEY:
+        newStatusIndex =
+          currentStatusIndex === statusOptions.length - 1
+            ? 0
+            : currentStatusIndex + 1;
+        return onEditTodo(statusOptions[newStatusIndex]);
+      case UP_ARROW_KEY:
+        newStatusIndex =
+          currentStatusIndex === 0
+            ? statusOptions.length - 1
+            : currentStatusIndex - 1;
+        return onEditTodo(statusOptions[newStatusIndex]);
+      case RIGHT_ARROW_KEY:
+        newStatusIndex =
+          currentStatusIndex === statusOptions.length - 1
+            ? 0
+            : currentStatusIndex + 1;
+        return onEditTodo(statusOptions[newStatusIndex]);
+      case LEFT_ARROW_KEY:
+        newStatusIndex =
+          currentStatusIndex === 0
+            ? statusOptions.length - 1
+            : currentStatusIndex - 1;
+        return onEditTodo(statusOptions[newStatusIndex]);
+      case SPACE_KEY:
+        return setDraggedTodo();
+      case ENTER_KEY:
+        return setDraggedTodo();
+      case ESCAPE_KEY:
+        return setDraggedTodo();
+      default:
+        return;
+    }
+  };
+
+  useEffect(() => {
+    !!draggedTodo &&
+      // updates draggingTodo so if using clipboard the state is updated and and fluently be moved across the body
+      setDraggedTodo(todos.find((todo) => todo.id === draggedTodo.id));
+  }, [todos, draggedTodo]);
 
   const onExportError = (message) => {
     setToastData({
@@ -139,26 +213,36 @@ const TodosBoard = () => {
     if (isLoading) {
       return new Array(5)
         .fill()
-        .map((item, index) => <TodoPlaceholder key={index * Math.random()} />);
+        .map((item, index) => (
+          <TodoPlaceholder key={`todo-placeholder${index + Math.random()}`} />
+        ));
     }
     return !!todos.length ? (
       Object.values(statuses).map((status, statusIndex) => (
         <StyledTodosBoardItem
           id={status.split(" ").join("-")}
-          key={statusIndex * Math.random()}
+          key={`status-${statusIndex + Math.random()}`}
         >
           <StyledTodosBoardItemTitle>
-            {" "}
             {`${status[0].toUpperCase()}${status.substring(1)}`}
           </StyledTodosBoardItemTitle>
-          <StyledTodosBoardItemContent onDragOver={onDragOver} onDrop={onDrop}>
-            {!!getFilteredTodos(status).length ? (
-              getFilteredTodos(status).map((todo, todoIndex) => (
+          <StyledTodosBoardItemContent
+            onDragOver={onDragOver}
+            onDrop={onDrop}
+            onKeyDown={onKeyDown}
+            aria-label={`droppable are for status ${status}`}
+          >
+            {!!getTodosPerStatus(status).length ? (
+              getTodosPerStatus(status).map((todo, todoIndex) => (
                 <Todo
-                  key={todoIndex * Math.random()}
+                  key={`todo-${todoIndex + Math.random()}`}
                   todo={todo}
                   isTodoBoard={true}
+                  isDragging={
+                    !!draggedTodo ? todo.id === draggedTodo.id : false
+                  }
                   onDragStart={(event) => onDragStart(event, todo)}
+                  onBlur={() => setDraggedTodo()}
                 />
               ))
             ) : (

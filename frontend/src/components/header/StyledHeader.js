@@ -23,7 +23,7 @@ export const StyledHeader = styled.header`
 
 export const StyledHeaderTitle = styled.h1`
   font-size: 180%;
-  color: ${({theme}) => theme.colors.green};
+  color: ${({theme}) => theme.colors.highlight};
   font-style: italic;
   text-align: center;
 `;

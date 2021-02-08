@@ -1,5 +1,4 @@
 import React, { useRef, Fragment } from "react";
-import { fileTypes } from "../../constants";
 import { StyledUpload, StyledUploadInput } from "./StyledUpload";
 
 const Upload = ({ label, disabled, fileTypes, onUpload, className }) => {
@@ -11,12 +10,13 @@ const Upload = ({ label, disabled, fileTypes, onUpload, className }) => {
         className={className}
         disabled={disabled}
         onClick={() => inputRef.current.click()}
-      ></StyledUpload>
+      />
       <StyledUploadInput
+        aria-label="File upload"
         ref={inputRef}
         type="file"
         accept={fileTypes}
-        onChange={(e) => onUpload(e)}
+        onChange={(event) => onUpload(event)}
       />
     </Fragment>
   );

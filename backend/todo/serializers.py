@@ -27,7 +27,6 @@ class TodoSerializer(serializers.ModelSerializer):
     fields = ('id', 'title', 'description', 'priority', 'status', 'is_completed')
 
   ''' def get_priority(self, obj):
-    print(666, obj, obj.priority)
     if obj.priority == 1: 
         return "low"
     elif obj.priority == 2: 
@@ -36,7 +35,6 @@ class TodoSerializer(serializers.ModelSerializer):
         return "high"
 
   def get_status(self, obj):
-    print(7777, obj.status)
     if obj.status == 1: 
         return "backlog"
     elif obj.status == 2: 

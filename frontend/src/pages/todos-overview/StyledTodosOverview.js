@@ -20,11 +20,15 @@ export const StyledTodosList = styled(Card)`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 80%;
   margin-top: 50px;
   box-sizing: border-box;
-  height: 517px;
+  height: 450px;
   overflow: hidden;
+
+  @media (min-width: 480px) {
+    width: 65%;
+  }
 
   @media (min-width: 768px) {
     margin-top: 0;
@@ -34,11 +38,21 @@ export const StyledTodosList = styled(Card)`
 
 export const StyledAddTodo = styled.div`
   display: flex;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 
+  @media (min-width: 480px) {
+    width: 65%;
+    box-sizing: border-box;
+  }
+
   @media (min-width: 768px) {
-    width: 55%;
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 1123px) {
+    width: 45%;
     box-sizing: border-box;
   }
 `;
@@ -46,6 +60,12 @@ export const StyledAddTodo = styled.div`
 export const StyledTodosListHeader = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const StyledTodosListHeaderTop = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
 `;
 
 export const StyledTodosListHeaderTitle = styled.div`
@@ -79,21 +99,22 @@ export const StyledTodosListHeaderIcon = styled.img`
   }
 `;
 
-export const StyledTodosListNoTodos = styled(Card)`
-  margin-top: 50px;
+export const StyledTodosListNoTodos = styled.div`
+  margin: 50px auto;
+  text-align: center;
   font-style: italic;
 `;
 
 export const StyledTodosListHeaderOrder = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  padding: 0.3rem 0;
 `;
 
 export const StyledTodosListOrder = styled.span`
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   font-size: 90%;
-  padding: 5px 0;
-  height: 30px;
+  height: 2rem;
   text-align: center;
   writing-mode: vertical-rl;
 
@@ -104,10 +125,9 @@ export const StyledTodosListOrder = styled.span`
 `;
 
 export const StyledTodosListDropdown = styled(Dropdown)`
-  padding-right: 5px;
-  color: ${({ theme }) => theme.colors.font};
-  flex-direction: row;
-  align-items: flex-end;
+  padding: 0 0.3rem;
+  /* flex-direction: row;
+  align-items: center; */
 `;
 
 export const StyledTodosListSearch = styled(Search)`
@@ -117,16 +137,37 @@ export const StyledTodosListSearch = styled(Search)`
 
 export const StyledTodosListBody = styled.ul`
   overflow: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  overflow-x: hidden;
   margin-top: 15px;
+  /*  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
     display: none;
+  } */
+  /* width */
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.colors.disabled};
+    border-radius: 0.5rem;
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.highlight};
+    border-radius: 7rem;
+  }
+
+  &:hover {
+    overflow-y: auto;
+   
   }
 `;
 
 export const StyledExport = styled(Export)`
-  width: 40%;
-  margin-left: auto;
+  margin-left: 1rem;
 `;

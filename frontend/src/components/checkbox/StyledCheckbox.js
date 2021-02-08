@@ -15,7 +15,6 @@ export const StyledCheckboxToggle = styled.div`
   box-shadow: 0 1px 4px ${({theme}) => theme.colors.shadow};
   border-radius: 3px;
   background-color: ${({ theme }) => theme.colors.primary};
-  margin-left: 15px;
 
   :hover {
     cursor: pointer;
@@ -43,13 +42,13 @@ export const StyledCheckboxToggleTick = styled.img`
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg) brightness(92%) contrast(104%);
 `;
 
-export const StyledCheckboxLabel = styled.div`
+export const StyledCheckboxLabel = styled.label`
   font-size: 95%;
-  margin-left: 5px;
+  margin-left: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
 
   ${({ disabled }) =>
     disabled ?

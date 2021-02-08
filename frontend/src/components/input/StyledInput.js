@@ -18,6 +18,10 @@ export const StyledInput = styled.input`
   position: relative;
   height: 30px;
 
+  :focus {
+    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+  }
+
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus,
@@ -32,7 +36,7 @@ export const StyledInput = styled.input`
 `;
 export const StyledLabel = styled.label`
   display: block;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   margin-bottom: 5px;
   margin-left: 5px;
   font-size: 95%;

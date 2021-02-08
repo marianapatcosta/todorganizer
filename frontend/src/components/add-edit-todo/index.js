@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { ExcelRenderer } from "react-excel-renderer";
-import {  Checkbox, Dropdown, Input, Textarea, Upload } from "../";
+import { Checkbox, Dropdown, Input, Textarea, Upload } from "../";
 import {
   errorMessages,
   fileTypes,
@@ -12,7 +12,9 @@ import {
   StyledForm,
   StyledFormTitle,
   StyledFormTitleText,
+  StyledFormItems,
   StyledFormItem,
+  StyledFormDropdown,
   StyledFormButton,
   StyledFormCancel,
 } from "./StyledAddEditTodo";
@@ -66,8 +68,8 @@ const AddEditTodo = ({
 
   const handleFormFieldChange = (value, setter) => setter(value);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     const isFormValid = validateForm();
     if (!isFormValid) return;
@@ -87,8 +89,8 @@ const AddEditTodo = ({
     onCancel();
   };
 
-  const onFileUpload = async (e) => {
-    const uploadedFile = e.target.files[0];
+  const onFileUpload = async (event) => {
+    const uploadedFile = event.target.files[0];
     try {
       const response = await ExcelRenderer(uploadedFile);
       const todos = excelToJson(response.rows);
@@ -140,7 +142,7 @@ const AddEditTodo = ({
               />
             </div>
             {(!!title || !!description) && (
-              <StyledFormCancel onClick={onCancelAddEdit}>
+              <StyledFormCancel tabIndex="0" onClick={onCancelAddEdit}>
                 Cancel
               </StyledFormCancel>
             )}
@@ -169,31 +171,33 @@ const AddEditTodo = ({
               errorText={errors.description}
             />
           </StyledFormItem>
-          <StyledFormItem>
-            <Dropdown
-              options={Object.values(priorities)}
-              selectedOption={priority}
-              title={"Priority"}
-              onOptionClick={(clickedItem) =>
-                handleFormFieldChange(clickedItem, setPriority)
-              }
-            />
-          </StyledFormItem>
-          <StyledFormItem>
-            <Dropdown
-              options={Object.values(statuses)}
-              selectedOption={status}
-              title={"Status"}
-              onOptionClick={(clickedItem) =>
-                handleFormFieldChange(clickedItem, setStatus)
-              }
-            />
-          </StyledFormItem>
+          <StyledFormItems>
+            <StyledFormItem>
+              <StyledFormDropdown
+                options={Object.values(priorities)}
+                selectedOption={priority}
+                label={"Priority"}
+                onChooseOption={(chosenItem) =>
+                  handleFormFieldChange(chosenItem, setPriority)
+                }
+              />
+            </StyledFormItem>
+            <StyledFormItem>
+              <Dropdown
+                options={Object.values(statuses)}
+                selectedOption={status}
+                label={"Status"}
+                onChooseOption={(chosenItem) =>
+                  handleFormFieldChange(chosenItem, setStatus)
+                }
+              />
+            </StyledFormItem>
+          </StyledFormItems>
           <StyledFormItem>
             <Checkbox
-              onClick={() =>
-                setIsCompleted((prevIsCompleted) => !prevIsCompleted)
-              }
+              onChange={() => setIsCompleted((prevIsCompleted) => !prevIsCompleted)}
+              // native checkbox
+              // onChange={(event) => setIsCompleted(event.target.checked)}
               checked={is_completed}
               label={"is completed?"}
             />

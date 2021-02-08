@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Checkbox } from "../index.js";
 
 const getPriorityColor = (priority, themeColors) => {
   const priorities = {
@@ -14,11 +13,11 @@ const getPriorityColor = (priority, themeColors) => {
 export const StyledTodo = styled.li`
   position: relative;
   list-style: none;
-  width: 100%;
-  margin-bottom: 10px;
+  width: 95%;
+  margin: 0 auto 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
-  padding: 10px;
+  padding: 0.6rem;
   background: ${({ theme }) => theme.colors.primary};
   font-size: 90%;
   box-sizing: border-box;
@@ -32,24 +31,21 @@ export const StyledTodo = styled.li`
         cursor: -moz-grab;
         cursor: -webkit-grab;
       }
-
-      :draggable {
-        backgroundColor = 'yellow';
-      }
     `
-      : ""}
-
-  ${({ isDragging }) =>
-    isDragging
-      ? `    
-        color: "red";     
-        background: 'yellow';      
-      `
       : ""}
 `;
 
+export const StyledTodoContent = styled.div`
+  display: flex;
+`;
+
+export const StyledTodoItems = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 export const StyledTodoItem = styled.div`
-  padding-bottom: 5px;
+  padding-bottom: 0.3rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -59,7 +55,7 @@ export const StyledTodoTitle = styled(StyledTodoItem)`
   font-weight: 700;
 `;
 
-export const StyledTodoDescription = styled(StyledTodoItem)`
+export const StyledTodoDescription = styled.div`
   /* overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -67,21 +63,22 @@ export const StyledTodoDescription = styled(StyledTodoItem)`
   overflow: hidden;
   position: relative;
   //max-height = line-height (1.2) * lines max number (3)
-  max-height: 3.6em;
-  text-align: justify;
-  padding-right: 1em;
+  max-height: 3.5rem;
+  text-align: left;
+  padding-right: 1rem;
+  padding-bottom: 0.3rem;
 
   :before {
     content: "...";
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 0.3rem;
+    right: 0.3rem;
   }
 
   :after {
     content: "";
     position: absolute;
-    right: 0;
+    right: 0.3rem;
     width: 10px;
     height: 10px;
     margin-top: 10px;
@@ -137,7 +134,13 @@ export const StyledTodoActionsIcon = styled.img`
   }
 `;
 
-export const StyledTodoCheckbox = styled(Checkbox)`
-  margin-left: 0;
-  color: ${({ theme }) => theme.colors.font};
+export const StyledTodoItemCompleted = styled.span`
+  color: ${({ theme }) => theme.colors.highlight};
+  font-weight: 700;
+  font-style: italic;
+  margin-right: 0.5rem;
+  text-align: right;
+  writing-mode: vertical-lr;
+  transform: rotate(-180deg);
+  padding-bottom: 0.3rem;
 `;

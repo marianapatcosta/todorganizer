@@ -8,13 +8,8 @@ import {
   StyledTabsSpacer,
 } from "./StyledTabs";
 
-const Tabs = ({ disabled, tabsMetadata, className }) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-
-  useEffect(() => {
-    const activeTab = localStorage.getItem("activeTab");
-    activeTab && setActiveTabIndex(+activeTab);
-  }, []);
+const Tabs = ({ disabled, tabsPurpose, tabsMetadata, className }) => {
+  const [activeTabIndex, setActiveTabIndex] = useState(+localStorage.getItem("activeTab") || 0);
 
   useEffect(() => {
     localStorage.setItem("activeTab", activeTabIndex);
@@ -25,10 +20,14 @@ const Tabs = ({ disabled, tabsMetadata, className }) => {
   return (
     <StyledTabs className={className}>
       <StyledTabsListWrapper>
-        <StyledTabsList disabled={disabled}>
+        <StyledTabsList
+          disabled={disabled}
+          role="tablist"
+          aria-label={`Select ${tabsPurpose}`}
+        >
           {tabsMetadata.map(({ label }, index) => (
             <Tab
-              key={index + Math.random()}
+              key={`tab-${index + Math.random()}`}
               label={label}
               isActive={index === activeTabIndex}
               onClick={() => onClickTab(index)}
@@ -36,10 +35,25 @@ const Tabs = ({ disabled, tabsMetadata, className }) => {
           ))}
         </StyledTabsList>
       </StyledTabsListWrapper>
-      <StyledTabsContent>
+      {tabsMetadata.map(({ label, renderContent }, index) => (
+        <StyledTabsContent
+          key={`tab-panel-${index + Math.random()}`}
+          role="tabpanel"
+          aria-labelledby={label}
+          aria-hidden={index !== activeTabIndex}
+          hidden={index !== activeTabIndex}
+        >
+          <StyledTabsSpacer />
+          {renderContent()}
+        </StyledTabsContent>
+      ))}
+      {/*    <StyledTabsContent
+        role="tabpanel"
+        aria-labelledby={tabsMetadata[activeTabIndex].label}
+      >
         <StyledTabsSpacer />
         {tabsMetadata[activeTabIndex].renderContent()}
-      </StyledTabsContent>
+      </StyledTabsContent> */}
     </StyledTabs>
   );
 };

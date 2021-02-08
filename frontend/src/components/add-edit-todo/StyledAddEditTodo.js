@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "../button";
 import Card from "../card";
+import Dropdown from "../dropdown";
 
 export const StyledAddEditTodo = styled(Card)`
   width: 100%;
@@ -20,13 +21,21 @@ export const StyledFormTitle = styled.div`
 export const StyledFormTitleText = styled.div`
   font-weight: 700;
   font-size: 110%;
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.highlight};
   padding: 6px 0;
+`;
+
+export const StyledFormItems = styled.div`
+  display: flex;
 `;
 
 export const StyledFormItem = styled.div`
   width: 100%;
   margin-bottom: 15px;
+`;
+
+export const StyledFormDropdown = styled(Dropdown)`
+  width: 95%;
 `;
 
 export const StyledFormButton = styled(Button)`
