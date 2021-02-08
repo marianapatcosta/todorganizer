@@ -3,14 +3,14 @@ import { Card, Export, Toast } from "../../components";
 
 export const StyledTodosBoardWrapper = styled.div`
   display: flex;
-  margin: 15px;
+  margin: 1rem;
   flex-direction: column;
 `;
 
 export const StyledTodosBoard = styled(Card)`
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  min-height: 18.75rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -19,17 +19,17 @@ export const StyledTodosBoard = styled(Card)`
 `;
 
 export const StyledTodosBoardItem = styled(Card)`
-  margin: 15px;
+  margin: 1rem;
 
   @media (min-width: 1123px) {
-    width: 200px;
+    width: 12.5rem;
   }
 `;
 
 export const StyledTodosBoardItemTitle = styled.div`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.highlight};
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 `;
 
 export const StyledTodosBoardItemContent = styled.ul`
@@ -37,7 +37,7 @@ export const StyledTodosBoardItemContent = styled.ul`
 `;
 
 export const StyledTodosBoardNoItems = styled.p`
-  margin-top: 25px;
+  margin-top: 1.5rem;
   font-style: italic;
   line-height: 1.5rem;
 `;
@@ -51,7 +51,7 @@ export const StyledTodosBoardToast = styled(Toast)`
 `;
 
 export const StyledExport = styled(Export)`
-  width: 100px;
+  width: 6.25rem;
   align-self: flex-end;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 `;

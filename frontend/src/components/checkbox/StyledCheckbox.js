@@ -9,11 +9,11 @@ export const StyledCheckboxToggle = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  width: 15px;
-  height: 15px;
-  margin-top: 1px;
-  box-shadow: 0 1px 4px ${({theme}) => theme.colors.shadow};
-  border-radius: 3px;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.063rem;
+  box-shadow: 0 0.063rem 0.25rem ${({theme}) => theme.colors.shadow};
+  border-radius: 0.2rem;
   background-color: ${({ theme }) => theme.colors.primary};
 
   :hover {
@@ -37,8 +37,8 @@ export const StyledCheckboxToggle = styled.div`
 `;
 
 export const StyledCheckboxToggleTick = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 1rem;
+  height: 1rem;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg) brightness(92%) contrast(104%);
 `;
 

@@ -20,8 +20,8 @@ export const StyledCheckbox = styled.label`
 `;
 
 export const StyledCheckboxToggleTick = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 1rem;
+  height: 1rem;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
     brightness(92%) contrast(104%);
   // visibility: ${({ checked }) => (checked ? "visible" : "hidden")};
@@ -31,17 +31,17 @@ export const StyledCheckboxToggle = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  width: 15px;
-  height: 15px;
-  margin-top: 1px;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.063rem;
   margin-left: 0.5rem;
-  box-shadow: 0 1px 4px ${({ theme }) => theme.colors.shadow};
-  border-radius: 3px;
+  box-shadow: 0 0.063rem 0.25rem ${({ theme }) => theme.colors.shadow};
+  border-radius: 0.2rem;
   background-color: ${({ theme }) => theme.colors.primary};
 
   // if StyledCheckboxToggle is parent of StyledCheckboxInput
   :focus-within {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   :hover {
@@ -52,7 +52,7 @@ export const StyledCheckboxToggle = styled.div`
   // when native checkbox is focused, adds focus to the sibling StyledCheckboxToggle
   // (indicated by "&", which indicates the main component)
   /* {StyledCheckboxInput}:focus + & {
-      outline: 2px solid ${({ theme }) => theme.colors.highlight};
+      outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }*/
 
   ${({ disabled }) =>
@@ -76,7 +76,7 @@ export const StyledCheckboxInput = styled.input`
 
   // when focus, adds a border to its sibling StyledCheckboxToggle
   :focus + ${StyledCheckboxToggle} {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   :focus:not(:focus-visible) + ${StyledCheckboxToggle} {

@@ -57,10 +57,10 @@ export const StyledDropdownHeader = styled.select`
   cursor: inherit;
   line-height: inherit;
   /*   background: url(${DownArrow}) no-repeat;
-  background-size: 15px 15px;
+  background-size: 1rem 1rem;
   background-position: 95%; */
   background-color: ${({ theme }) => theme.colors.primary};
-  box-shadow: 0 1px 4px ${({ theme }) => theme.colors.shadow};
+  box-shadow: 0 0.063rem 0.25rem ${({ theme }) => theme.colors.shadow};
   padding: 0.3rem 2rem 0.3rem 0.8rem;
   font-size: 95%;
   white-space: nowrap;
@@ -76,7 +76,7 @@ export const StyledDropdownHeader = styled.select`
   }
 
   :focus {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   ${({ disabled, theme }) =>
@@ -93,7 +93,7 @@ export const StyledDropdownHeader = styled.select`
 `;
 
 export const StyledDropdownOption = styled.option`
-  padding: 10px 5px;
+  padding: 0.625rem 0.3rem;
   box-sizing: border-box;
   font-size: 90%;
 

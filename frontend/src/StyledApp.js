@@ -9,7 +9,7 @@ export const StyledApp = styled.div`
 export const StyledAppSpacer = styled.div`
   left: 0;
   top: 0;
-  height: 80px;
+  height: 5rem;
   width: 100%;
 `;
 
@@ -32,7 +32,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   * :focus {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   * :focus:not(:focus-visible) {
