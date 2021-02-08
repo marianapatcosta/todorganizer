@@ -20,23 +20,19 @@ const fadeIn = keyframes`
 `;
 
 export const StyledToast = styled.div`
-  box-shadow: 0 2px 8px rgba(${({ theme }) => theme.colors.shadow}, 0.2);
+  box-shadow: 0 0.125rem 0.5rem rgba(${({ theme }) => theme.colors.shadow}, 0.2);
   width: 85%;
-  height: 50px;
+  height: 3.125rem;
   position: absolute;
   top: 35%;
   left: 0;
   right: 0;
   margin: 0 auto;
-  padding: 10px;
+  padding: 0.635rem;
   z-index: 2;
   display: flex;
   align-items: center;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
+  border-radius: 0.2rem;
   animation: ${fadeIn} 0.5s;
   -webkit-animation: ${fadeIn} 0.5s;
   background-color: ${({ type, theme }) => typeClass(type, theme.colors)};

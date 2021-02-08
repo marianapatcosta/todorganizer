@@ -7,8 +7,8 @@ export const StyledTabsListWrapper = styled.div`
   z-index: 1;
   background-color: ${({ theme }) => theme.colors.primary};
   width: 100%;
-  top: 60px;
-  height: 65px;
+  top: 3.75rem;
+  height: 4rem;
 `;
 
 export const StyledTabsList = styled.ul`
@@ -16,10 +16,10 @@ export const StyledTabsList = styled.ul`
   align-items: flex-end;
   justify-content: flex-start;
   list-style: none;
-  margin: 20px 0px;
-  padding: 10px 20px 0;
-  // border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
-  box-shadow: 0 4px 8px -8px ${({ theme }) => theme.colors.shadow};
+  margin: 1.25rem 0;
+  padding: 0.625rem 1.25rem 0;
+  // border-bottom: 0.063rem solid ${({ theme }) => theme.colors.secondary};
+  box-shadow: 0 0.25rem 0.5rem -0.5rem ${({ theme }) => theme.colors.shadow};
 
   ${({ disabled }) =>
     disabled
@@ -45,5 +45,5 @@ export const StyledTabsContent = styled.div`
 `;
 
 export const StyledTabsSpacer = styled.div`
-  height: 40px;
+  height: 2.5rem;
 `;

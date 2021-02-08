@@ -14,9 +14,9 @@ export const StyledTodo = styled.li`
   position: relative;
   list-style: none;
   width: 95%;
-  margin: 0 auto 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 6px;
+  margin: 0 auto 0.625rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.26);
+  border-radius: 0.375rem;
   padding: 0.6rem;
   background: ${({ theme }) => theme.colors.primary};
   font-size: 90%;
@@ -79,9 +79,9 @@ export const StyledTodoDescription = styled.div`
     content: "";
     position: absolute;
     right: 0.3rem;
-    width: 10px;
-    height: 10px;
-    margin-top: 10px;
+    width: 0.625rem;
+    height: 0.625rem;
+    margin-top: 0.625rem;
     background: ${({ theme }) => theme.colors.primary};
   }
 `;
@@ -91,17 +91,18 @@ export const StyledTodoPriority = styled.div`
   border-radius: 50%;
   background-color: ${({ theme, priority }) =>
     getPriorityColor(priority, theme.colors)};
-  width: 12px;
-  height: 12px;
+  width: 0.75rem;
+  height: 0.75rem;
   vertical-align: middle;
+  margin-left: 0.3rem;
 `;
 
 export const StyledTodoActions = styled.div`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.26);
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
   width: 0;
   height: 100%;
   top: 0;
@@ -122,9 +123,9 @@ export const StyledTodoActions = styled.div`
 `;
 
 export const StyledTodoActionsIcon = styled.img`
-  width: 17px;
-  height: 17px;
-  padding: 10px 0;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.625rem 0;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
     brightness(92%) contrast(104%);
 

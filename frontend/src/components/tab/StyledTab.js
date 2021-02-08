@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const StyledTab = styled.li`
-  min-width: 50px;
+  min-width: 3.125rem;
   color: ${({ theme }) => theme.colors.highlight};
-  padding: 5px 10px;
+  padding: 0.3rem 0.625rem;
   position: relative;
 
   :hover {
@@ -14,20 +14,20 @@ export const StyledTab = styled.li`
     isActive
       ? `font-weight: 700; 
         background-color: ${theme.colors.primary};
-        box-shadow: 0 0 2px ${theme.colors.shadow};
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        box-shadow: 0 0 0.125rem ${theme.colors.shadow};
+        border-top-left-radius: 0.625rem;
+        border-top-right-radius: 0.625rem;
        /*  border: solid ${theme.colors.secondary};
-        border-width: 1px 1px 0 1px
-        margin-bottom: -3px; */
+        border-width: 0.063rem 0.063rem 0 0.063rem;
+        margin-bottom: -0.2rem; */
 
         :before {
           content: "";
           position: absolute;
           width: 100%;
-          height: 5px;
-          bottom: -5px;
-          left: 0px;
+          height: 0.3rem;
+          bottom: -0.3rem;
+          left: 0;
           background-color: ${theme.colors.primary};
         }
       `

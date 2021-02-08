@@ -7,7 +7,7 @@ export const StyledTodosOverview = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 30px 0 15px;
+  margin: 2rem 0 1rem;
 
   @media (min-width: 768px) {
     width: 90%;
@@ -21,9 +21,9 @@ export const StyledTodosList = styled(Card)`
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin-top: 50px;
+  margin-top: 3.125rem;
   box-sizing: border-box;
-  height: 450px;
+  height: 28rem;
   overflow: hidden;
 
   @media (min-width: 480px) {
@@ -79,17 +79,17 @@ export const StyledTodosListHeaderTitle = styled.div`
 export const StyledTodosListHeaderBottom = styled(Card)`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 5px;
+  padding: 0.3rem;
   overflow: visible;
 `;
 
 export const StyledTodosListHeaderIcon = styled.img`
-  width: 17px;
-  height: 17px;
-  padding: 10px 0;
-  margin-left: 10px;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.625rem 0;
+  margin-left: 0.625rem;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
     brightness(92%) contrast(104%);
 
@@ -100,7 +100,7 @@ export const StyledTodosListHeaderIcon = styled.img`
 `;
 
 export const StyledTodosListNoTodos = styled.div`
-  margin: 50px auto;
+  margin: 3.125rem auto;
   text-align: center;
   font-style: italic;
 `;
@@ -132,13 +132,13 @@ export const StyledTodosListDropdown = styled(Dropdown)`
 
 export const StyledTodosListSearch = styled(Search)`
   width: 95%;
-  margin: 5px;
+  margin: 0.3rem;
 `;
 
 export const StyledTodosListBody = styled.ul`
   overflow: auto;
   overflow-x: hidden;
-  margin-top: 15px;
+  margin-top: 1rem;
   /*  -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -158,7 +158,7 @@ export const StyledTodosListBody = styled.ul`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.highlight};
+    background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 7rem;
   }
 

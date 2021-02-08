@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  padding: 10px 20px;
-  border: 1px solid ${({ theme }) => theme.colors.highlight};
-  border-radius: 3px;
+  padding: 0.625rem 1.25rem;
+  border: 0.063rem solid ${({ theme }) => theme.colors.highlight};
+  border-radius: 0.2rem;
   background: ${({ theme }) => theme.colors.transparent};
   color: ${({ theme }) => theme.colors.highlight};
   cursor: pointer;
   font-size: 90%;
-  min-width: 100px;
+  min-width: 6.25rem;
 
   :hover {
     opacity: 0.5;
@@ -17,9 +17,7 @@ export const StyledButton = styled.button`
   :disabled,
   :hover:disabled,
   :active:disabled {
-    background: ${({ theme }) => theme.colors.disabled};
-    color: #ccc;
-    border-color: #ccc;
+    opacity: 0.3;
     pointer-events: none;
   }
 `;

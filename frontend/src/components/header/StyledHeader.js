@@ -5,19 +5,19 @@ export const StyledHeader = styled.header`
   position: fixed;
   left: 0;
   top: 0;
-  height: 80px;
+  height: 5rem;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: ${({theme}) => theme.colors.secondary};
-  box-shadow: 0 1px 8px ${({theme}) => theme.colors.shadow};
+  box-shadow: 0 0.063rem 0.5rem ${({theme}) => theme.colors.shadow};
   z-index: 10;
-  padding: 0 15px;
+  padding: 0 1rem;
   box-sizing: border-box;
 
   @media (min-width: 768px) {
-    padding: 0 50px;
+    padding: 0 3.125rem;
   }
 `;
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledSearchWrapper = styled.div`
-  margin: 15px 0;
+  margin: 1rem 0;
   position: relative;
   width: 100%;
 `;
@@ -12,14 +12,13 @@ export const StyledSearch = styled.input`
   width: 100%;
   border: none;
   background-color: ${({ theme }) => theme.colors.primary};
-  box-shadow: 0 1px 4px ${({ theme }) => theme.colors.shadow};
+  box-shadow: 0 0.063rem 0.25rem ${({ theme }) => theme.colors.shadow};
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: 0.3rem 0.625rem;
   position: relative;
-  height: 30px;
-
+  height: 2rem;
   :focus {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   :-webkit-autofill,
@@ -27,7 +26,7 @@ export const StyledSearch = styled.input`
   :-webkit-autofill:focus,
   :-webkit-autofill:active {
     -webkit-text-fill-color: ${({ theme }) => theme.colors.font};
-    -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.primary} inset !important;
+    -webkit-box-shadow: 0 0 0 2rem ${({ theme }) => theme.colors.primary} inset !important;
   }
 
   ${({ errorText }) =>
@@ -39,9 +38,9 @@ export const StyledSearch = styled.input`
 
 export const StyledSearchIcon = styled.img`
   position: absolute;
-  width: 15px;
-  height: 15px;
-  top: 8px;
+  width: 1rem;
+  height: 1rem;
+  top: 0.5rem;
   right: 5%;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
     brightness(92%) contrast(104%);
@@ -50,9 +49,9 @@ export const StyledSearchIcon = styled.img`
 export const StyledMoStyledSearchIconClear = styled.span`
   color: ${({ theme }) => theme.colors.highlight};
   position: absolute;
-  width: 15px;
-  height: 15px;
-  top: 4px;
+  width: 1rem;
+  height: 1rem;
+  top: 0.25rem;
   right: 5%;
   :hover {
     cursor: pointer;

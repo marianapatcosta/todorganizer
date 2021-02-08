@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledTextareaWrapper = styled.div`
-  margin: 15px 0;
+  margin: 1rem 0;
   position: relative;
   width: 100%;
 `;
@@ -11,15 +11,15 @@ export const StyledTextarea = styled.textarea`
   color: ${({ theme }) => theme.colors.font};
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primary};
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  box-shadow: 0 1px 4px ${({theme}) => theme.colors.shadow};
+  border: 0.063rem solid ${({ theme }) => theme.colors.primary};
+  box-shadow: 0 0.063rem 0.25rem ${({theme}) => theme.colors.shadow};
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: 0.3rem 0.625rem;
   position: relative;
   resize: none;
 
   :focus {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   :-webkit-autofill,
@@ -27,7 +27,7 @@ export const StyledTextarea = styled.textarea`
   :-webkit-autofill:focus,
   :-webkit-autofill:active {
     -webkit-text-fill-color: ${({ theme }) => theme.colors.font};
-    -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.primary} inset !important;
+    -webkit-box-shadow: 0 0 0 2rem ${({ theme }) => theme.colors.primary} inset !important;
   }
 
   ${({ errorText, theme }) =>
@@ -38,8 +38,8 @@ export const StyledTextarea = styled.textarea`
 export const StyledLabel = styled.label`
   display: block;
   color: ${({ theme }) => theme.colors.highlight};
-  margin-bottom: 5px;
-  margin-left: 5px;
+  margin-bottom: 0.3rem;
+  margin-left: 0.3rem;
   font-size: 95%;
 `;
 
@@ -47,5 +47,5 @@ export const StyledTextareaError = styled.p`
   color: ${({ theme }) => theme.colors.red};
   font-weight: bold;
   font-size: 90%;
-  margin-top: 5px;
+  margin-top: 0.3rem;
 `;

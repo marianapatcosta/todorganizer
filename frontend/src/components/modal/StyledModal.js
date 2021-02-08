@@ -22,8 +22,8 @@ export const StyledModalContent = styled.div`
   left: 50%;
   width: 50%;
   background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 8px;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.26);
+  border-radius: 0.5rem;
   transform: translate(-50%, -50%);
   width: 40%;
   z-index: 10;
@@ -31,7 +31,7 @@ export const StyledModalContent = styled.div`
 `;
 
 export const StyledModalHeader = styled.header`
-  padding: 10px 5px;
+  padding: 0.625rem 0.3rem;
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.secondary};
 `;
@@ -47,7 +47,7 @@ export const StyledModalHeaderClose = styled.button`
   border: none;
   box-shadow: none;
   background-color: ${({ theme }) => theme.colors.transparent};
-  padding: 3px 7px;
+  padding: 0.2rem 0.45rem;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -55,26 +55,26 @@ export const StyledModalHeaderClose = styled.button`
   -o-border-radius: 50%;
 
   :hover {
-    background-color: #777676;
+    background-color: ${({ theme }) => theme.colors.grey};
     cursor: pointer;
   }
 `;
 
 export const StyledModalMessage = styled.p`
-  padding: 10px;
+  padding: 0.625rem;
   text-align: center;
   color: ${({ theme }) => theme.colors.highlight};
 `;
 
 export const StyledModalFooter = styled.footer`
-  padding: 20px 5px;
+  padding: 1.25rem 0.3rem;
   display: flex;
   justify-content: center;
 `;
 
 export const StyledModalFooterButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.transparent};
-  margin: 0 10px;
+  margin: 0 0.625rem;
 `;
 
 export const StyledModalFooterCancelButton = styled(StyledModalFooterButton)`

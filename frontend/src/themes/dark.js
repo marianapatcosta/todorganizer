@@ -5,7 +5,7 @@ export default {
     ...common.colors,
     primary: "hsl(120, 100%, 10%)",
     secondary: "hsl(120, 100%, 5%)",
-    disabled: "black",
+    disabled: "#aaaaaa",
     font: "#ffffff",
   },
 };

@@ -22,7 +22,7 @@ export const StyledDropdown = styled.div`
 export const StyledDropdownLabel = styled.label`
   display: block;
   color: ${({ theme }) => theme.colors.green};
-  margin: 0 10px 5px 5px;
+  margin: 0 0.625rem 0.3rem 0.3rem;
   font-size: 95%;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -35,12 +35,12 @@ export const StyledDropdownLabel = styled.label`
 
 export const StyledDropdownHeader = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
-  box-shadow: 0 1px 4px ${({ theme }) => theme.colors.shadow};
+  box-shadow: 0 0.063rem 0.25rem ${({ theme }) => theme.colors.shadow};
   display: flex;
   flex: auto;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
+  padding: 0.3rem 0.625rem;
   font-size: 95%;
   width: auto;
   position: relative;
@@ -50,7 +50,7 @@ export const StyledDropdownHeader = styled.div`
   }
 
   :focus {
-    outline: 2px solid ${({ theme }) => theme.colors.highlight};
+    outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
   }
 
   ${({ disabled }) =>
@@ -67,15 +67,15 @@ export const StyledDropdownHeader = styled.div`
 
 export const StyledDropdownHeaderText = styled.div`
 width: 90%;
-  margin-right: 5px;
+  margin-right: 0.3rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
 export const StyledDropdownHeaderArrow = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 1rem;
+  height: 1rem;
   filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
     brightness(92%) contrast(104%);
   transition: transform 0.5s linear;
@@ -92,23 +92,23 @@ export const StyledDropdownOptions = styled.ul`
   background-color: ${({ theme }) => theme.colors.primary};
   border-top: none;
   box-sizing: border-box;
-  box-shadow: 0 1px 4px ${({ theme }) => theme.colors.shadow};
+  box-shadow: 0 0.063rem 0.25rem ${({ theme }) => theme.colors.shadow};
   width: 100%;
   list-style: none;
-  max-height: 150px;
+  max-height: 9.375rem;
   overflow: auto;
   animation: ${rotateMenu} 700ms ease-in forwards;
   transform-origin: top center;
   -webkit-animation: ${rotateMenu} 700ms ease-in forwards;
   position: absolute;
   z-index: 1;
-  top: 30px;
+  top: 1.875rem;
   left: 0;
   font-size: 90%;
 `;
 
 export const StyledDropdownOption = styled.li`
-  padding: 10px 5px;
+  padding: 0.625rem 0.3rem;
   box-sizing: border-box;
   white-space: nowrap;
   text-overflow: ellipsis;
