@@ -1,5 +1,6 @@
 from enum import Enum
 from django.db import models
+from django.contrib.auth.models import User
 
 class PriorityTypes(Enum):
   LOW = "low"
@@ -23,6 +24,7 @@ class StatusTypes(Enum):
 
 # Create your models here.
 class Todo(models.Model):
+  owner = models.ForeignKey(User, on_delete=models.CASCADE, default='')
   title = models.CharField(max_length=120, blank=False, default='')
   description = models.TextField(max_length=1500, blank=False, default='')
   priority = models.CharField(max_length=120, choices=PriorityTypes.choices(), default=PriorityTypes.LOW)

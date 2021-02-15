@@ -1,50 +1,25 @@
 from rest_framework import serializers
 from .models import Todo
+from django.contrib.auth.models import User
 
-''' class Priorities:
-  types = {
-    1: "low",
-    2: "medium",
-    3: "high"
-  }
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
 
-class Statuses: 
-  types = {
-    "backlog": 1,
-    "ready to do": 2,
-    "on going": 3,
-    "review": 4,
-    "closed": 5
-  } '''
-
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+        
 class TodoSerializer(serializers.ModelSerializer):
-
-  ''' priority = serializers.SerializerMethodField();
-  status = serializers.SerializerMethodField(); '''
-
   class Meta:
     model = Todo
     fields = ('id', 'title', 'description', 'priority', 'status', 'is_completed')
 
-  ''' def get_priority(self, obj):
-    if obj.priority == 1: 
-        return "low"
-    elif obj.priority == 2: 
-        return "medium";
-    elif obj.priority == 3:
-        return "high"
-
-  def get_status(self, obj):
-    if obj.status == 1: 
-        return "backlog"
-    elif obj.status == 2: 
-        return "ready to do";
-    elif obj.status == 3:
-        return "on going"
-    elif obj.status == 4: 
-        return "review";
-    elif obj.status == 5:
-        return "closed" '''
    
    
    
