@@ -15,6 +15,8 @@ export const statuses = {
 export const errorMessages = {
   TITLE: "ToDo title cannot be empty!",
   DESCRIPTION: "ToDo description cannot be empty!",
+  USERNAME: "The username is invalid!",
+  PASSWORD: (charNum) => `The password should have at least ${charNum} characters.`,
 };
 
 export const toastTypes = {
@@ -80,4 +82,11 @@ export const KEYBOARD_CODES = {
   UP_ARROW_KEY: 38,
   RIGHT_ARROW_KEY: 39,
   DOWN_ARROW_KEY: 40,
+};
+
+export const initialInputState = {
+  value: "",
+  isRequired: true,
+  isValid: false,
+  isTouched: false,
 };

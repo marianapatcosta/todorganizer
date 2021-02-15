@@ -1,47 +1,112 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Header, Tabs } from "./components";
-import { TodosOverview, TodosBoard } from "./pages/";
-import { StyledApp, StyledAppSpacer, GlobalStyle } from "./StyledApp";
+import { Header } from "./components";
+import { Authentication, Home, Todos } from "./pages/";
 import lightTheme from "./themes/light";
 import darkTheme from "./themes/dark";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import { StyledApp, StyledAppSpacer, GlobalStyle } from "./StyledApp";
+import { AuthContext } from "./context/auth-context";
 
 const App = () => {
   const [isDarkTheme, setDarkTheme] = useState(false);
+  const [authToken, setAuthToken] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     const darkTheme = localStorage.getItem("darkTheme");
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
     darkTheme && setDarkTheme(JSON.parse(darkTheme));
+    storedUserData &&
+      storedUserData.authToken &&
+      login(
+        storedUserData.userId,
+        storedUserData.authToken,
+        storedUserData.username
+      );
   }, []);
 
   useEffect(() => {
     localStorage.setItem("darkTheme", isDarkTheme);
   }, [isDarkTheme]);
 
-  const tabsMetadata = [
-    {
-      label: "Overview",
-      renderContent: () => <TodosOverview />,
-    },
-    {
-      label: "Board",
-      renderContent: () => <TodosBoard />,
-    },
-  ];
+  const login = useCallback((userId, authToken, username) => {
+    setAuthToken(authToken);
+    setUserId(userId);
+    setUsername(username);
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({
+        userId,
+        authToken,
+        username,
+      })
+    );
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggingOut(true);
+    setAuthToken(null);
+    setUserId(null);
+    localStorage.removeItem("userData");
+  }, []);
+
+  const routes = authToken ? (
+    <Switch>
+      <Route path="/todos" exact>
+        <Todos />
+      </Route>
+      <Redirect to="/todos" />
+    </Switch>
+  ) : (
+    <Switch>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/authentication" exact>
+        <Authentication />
+      </Route>
+      <Redirect to="/" />
+    </Switch>
+  );
 
   return (
-    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-      <GlobalStyle />
-      <StyledApp>
-        <StyledAppSpacer />
-        <Header
-          title={"ToDOrganizer"}
-          isDarkTheme={isDarkTheme}
-          toggleThemeMode={event => setDarkTheme(event.target.checked)}
-        />
-        <Tabs tabsMetadata={tabsMetadata} tabsPurpose="separator" />
-      </StyledApp>
-    </ThemeProvider>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!authToken,
+        authToken,
+        userId,
+        username,
+        isLoggingOut,
+        setIsLoggingOut,
+        login,
+        logout,
+      }}
+    >
+      <Router>
+        <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+          <GlobalStyle />
+          <StyledApp>
+            <StyledAppSpacer />
+            <Header
+              title={"ToDOrganizer"}
+              isDarkTheme={isDarkTheme}
+              toggleThemeMode={(event) => setDarkTheme(event.target.checked)}
+            />
+            <main className="app__page-content">
+              <Suspense fallback={""}>{routes}</Suspense>
+            </main>
+          </StyledApp>
+        </ThemeProvider>
+      </Router>
+    </AuthContext.Provider>
   );
 };
 

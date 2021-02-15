@@ -22,7 +22,7 @@ export const StyledModalContent = styled.div`
   left: 50%;
   width: 50%;
   background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.26);
+  box-shadow: 0 0.125rem 0.5rem ${({ theme }) => `rgba(${theme.colors.secondary}, 0)`};
   border-radius: 0.5rem;
   transform: translate(-50%, -50%);
   width: 40%;

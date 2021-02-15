@@ -12,7 +12,7 @@ import {
   StyledTodoItems,
 } from "./StyledTodo";
 import { Delete, Edit } from "../../assets/icons";
-import { isEventValid } from "../../utils";
+import { isEventValid } from "../../utils/utils";
 import { KEYBOARD_CODES } from "../../constants";
 
 const Todo = ({
@@ -41,7 +41,7 @@ const Todo = ({
 
   useEffect(() => {
     isDragging && todoRef.current.focus();
-  });
+  }, []);
 
   return (
     <StyledTodo

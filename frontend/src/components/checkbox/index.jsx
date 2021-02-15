@@ -1,6 +1,6 @@
 import React from "react";
 import { Tick } from "../../assets/icons";
-import { isEventValid } from "../../utils";
+import { isEventValid } from "../../utils/utils";
 import {
   StyledCheckbox,
   StyledCheckboxToggle,

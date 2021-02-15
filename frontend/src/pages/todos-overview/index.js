@@ -1,4 +1,21 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef, useContext } from "react";
+import {
+  AddEditTodo,
+  Modal,
+  Toast,
+  Todo,
+  TodoPlaceholder,
+} from "../../components";
+import {
+  toastTypes,
+  orderOptions,
+  orderByOptions,
+  fileTypes,
+  priorityConverter,
+  statusConverter,
+} from "../../constants";
+import { Delete } from "../../assets/icons";
+import { isEventValid } from "../../utils/utils";
 import {
   StyledTodosOverview,
   StyledTodosList,
@@ -16,25 +33,10 @@ import {
   StyledExport,
   StyledTodosListBody,
 } from "./StyledTodosOverview";
-import {
-  AddEditTodo,
-  Modal,
-  Toast,
-  Todo,
-  TodoPlaceholder,
-} from "../../components";
-import {
-  toastTypes,
-  orderOptions,
-  orderByOptions,
-  fileTypes,
-  priorityConverter,
-  statusConverter,
-} from "../../constants";
-import { Delete } from "../../assets/icons";
-import { isEventValid } from "../../utils";
+import { AuthContext } from "../../context/auth-context";
 
 const TodosOverview = () => {
+  const { authToken } = useContext(AuthContext);
   const [todos, setTodos] = useState([]);
   const [todoToEdit, setTodoToEdit] = useState();
   const [todoToDelete, setTodoToDelete] = useState();
@@ -61,9 +63,16 @@ const TodosOverview = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/todos?search=${search}&ordering=${
-          order === orderOptions.DESC ? '-' : ""
-        }${orderBy.key}`
+        `${
+          process.env.REACT_APP_BACKEND_URL
+        }/api/todos?search=${search}&ordering=${
+          order === orderOptions.DESC ? "-" : ""
+        }${orderBy.key}`,
+        {
+          headers: {
+            Authorization: `Token ${authToken}`,
+          },
+        }
       );
       const responseData = await response.json();
       setTodos(
@@ -73,6 +82,7 @@ const TodosOverview = () => {
           status: statusConverter[todo.status],
         }))
       );
+      setTodoToEdit();
     } catch (error) {
       setToastData({
         message: "It was not possible to load your ToDos.",
@@ -90,7 +100,7 @@ const TodosOverview = () => {
   const onAddEditTodo = async (todo, customizedMessage) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/todos/${
+        `${process.env.REACT_APP_BACKEND_URL}/api/todos/${
           todoToEdit ? `${todoToEdit.id}/` : ""
         }`,
         {
@@ -98,6 +108,7 @@ const TodosOverview = () => {
           body: JSON.stringify(todo),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Token ${authToken}`,
           },
         }
       );
@@ -142,13 +153,14 @@ const TodosOverview = () => {
   const deleteTodo = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/todos/${
+        `${process.env.REACT_APP_BACKEND_URL}/api/todos/${
           todoToDelete ? `${todoToDelete.id}/` : ""
         }`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Token ${authToken}`,
           },
         }
       );
