@@ -23,6 +23,8 @@ router.register(r'todos', views.TodoView, 'todo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))  
+    path('api/', include(router.urls)),
+    path('account/register/', views.UserCreate.as_view()), 
+    path('account/login/', views.CustomAuthToken.as_view())
 ]
  

@@ -28,5 +28,6 @@ Simple ToDo desktop app developed using Electron, React and Django Rest Framewor
 ### Run "npm i" ou "yarn install" to install the required dependencies
 ### Run "npm run start-electron" to locally run the desktop app in dev mode 
 ### Run "npm run build" to generate an app installer and an unpacked standalone app.
+#### for winmac,  run  "npm run build-win" 
 #### for mac,  run  "npm run build-mac" 
 #### for linux,  run  "npm run build-linux" 
