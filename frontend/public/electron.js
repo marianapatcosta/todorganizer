@@ -40,7 +40,7 @@ const createWindow = () => {
         "backend.exe"
       );
 
-  // const django = require('child_process').spawn('runserver --noreload', ["..\\dist-django\\backend\\backend.exe"]);
+  //const django = require('child_process').spawn('runserver --noreload', ["..\\dist-django\\backend\\backend.exe"]);
   //const django = require('child_process').spawn('python', ['manage.py', 'runserver']);
   const django = require("child_process").execFile(
     djangoPath,

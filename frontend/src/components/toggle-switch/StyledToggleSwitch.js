@@ -32,7 +32,6 @@ export const StyledToggleSwitchLabel = styled.span`
   line-height: 0.75rem;
   padding: 0 0.125rem;
   align-self: center;
-  margin-right: 0.625rem;
   white-space: nowrap;
 
   :hover {

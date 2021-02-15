@@ -10,8 +10,8 @@ export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${({theme}) => theme.colors.secondary};
-  box-shadow: 0 0.063rem 0.5rem ${({theme}) => theme.colors.shadow};
+  background-color: ${({ theme }) => theme.colors.secondary};
+  box-shadow: 0 0.063rem 0.5rem ${({ theme }) => theme.colors.shadow};
   z-index: 10;
   padding: 0 1rem;
   box-sizing: border-box;
@@ -23,9 +23,20 @@ export const StyledHeader = styled.header`
 
 export const StyledHeaderTitle = styled.h1`
   font-size: 180%;
-  color: ${({theme}) => theme.colors.highlight};
+  color: ${({ theme }) => theme.colors.highlight};
   font-style: italic;
   text-align: center;
+`;
+
+export const StyledHeaderItems = styled.div`
+  display: flex;
+
+  align-items: center;
+`;
+
+export const StyledHeaderRight = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const StyledHeaderToggle = styled(ToggleSwitch)`
@@ -34,4 +45,20 @@ export const StyledHeaderToggle = styled(ToggleSwitch)`
   @media (min-width: 768px) {
     margin-right: 0;
   }
-  `;
+`;
+
+export const StyledLogout = styled.span`
+  color: ${({ theme }) => theme.colors.highlight};
+  cursor: pointer;
+  margin-left: 0.625rem;
+
+  &:hover {
+    opacity: 0.75;
+  }
+`;
+
+export const StyledSalutation = styled.span`
+  font-style: italic;
+  align-self: flex-end;
+  margin-top: 0.5rem;
+`;

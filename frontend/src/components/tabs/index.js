@@ -8,8 +8,16 @@ import {
   StyledTabsSpacer,
 } from "./StyledTabs";
 
-const Tabs = ({ disabled, tabsPurpose, tabsMetadata, className }) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(+localStorage.getItem("activeTab") || 0);
+const Tabs = ({
+  disabled,
+  tabsPurpose,
+  tabsMetadata,
+  className,
+  ...otherProps
+}) => {
+  const [activeTabIndex, setActiveTabIndex] = useState(
+    +localStorage.getItem("activeTab") || 0
+  );
 
   useEffect(() => {
     localStorage.setItem("activeTab", activeTabIndex);
@@ -18,7 +26,7 @@ const Tabs = ({ disabled, tabsPurpose, tabsMetadata, className }) => {
   const onClickTab = (tabIndex) => setActiveTabIndex(tabIndex);
 
   return (
-    <StyledTabs className={className}>
+    <StyledTabs className={className} {...otherProps}>
       <StyledTabsListWrapper>
         <StyledTabsList
           disabled={disabled}

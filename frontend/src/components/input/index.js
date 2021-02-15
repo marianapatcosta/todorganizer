@@ -1,23 +1,30 @@
 import React from "react";
-import { StyledInputWrapper, StyledInput, StyledLabel,StyledInputError } from "./StyledInput";
+import {
+  StyledInputWrapper,
+  StyledInput,
+  StyledLabel,
+  StyledInputIcon,
+  StyledInputError,
+} from "./StyledInput";
 
 const Input = ({
   id,
   label,
   type,
-  autoComplete = 'off',
+  autoComplete = "off",
   maxLength,
   value,
   placeholder,
   errorText,
+  icon,
+  iconText,
   onChange,
-  onBlur
+  onBlur,
+  onIconClick,
 }) => {
   return (
     <StyledInputWrapper>
-      <StyledLabel htmlFor={id}>
-        {label}
-      </StyledLabel>
+      <StyledLabel htmlFor={id}>{label}</StyledLabel>
       <StyledInput
         id={id}
         errorText={errorText}
@@ -28,8 +35,16 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         autoComplete={autoComplete}
-        >
-      </StyledInput>
+      ></StyledInput>
+      {icon && (
+        <StyledInputIcon
+          alt={iconText}
+          src={icon}
+          onClick={onIconClick}
+          role={onIconClick ? "button" : ""}
+          tabIndex={onIconClick ? "0" : "-1"}
+        />
+      )}
       {!!errorText && <StyledInputError>{errorText}</StyledInputError>}
     </StyledInputWrapper>
   );

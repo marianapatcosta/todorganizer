@@ -16,7 +16,7 @@ export const StyledInput = styled.input`
   box-sizing: border-box;
   padding: 0.3rem 0.625rem;
   position: relative;
-  height: 3rem;
+  height: 2rem;
 
   :focus {
     outline: 0.125rem solid ${({ theme }) => theme.colors.highlight};
@@ -40,6 +40,16 @@ export const StyledLabel = styled.label`
   margin-bottom: 0.3rem;
   margin-left: 0.3rem;
   font-size: 95%;
+`;
+
+export const StyledInputIcon = styled.img`
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  top: 58%;
+  right: 5%;
+  filter: invert(23%) sepia(43%) saturate(3232%) hue-rotate(100deg)
+    brightness(92%) contrast(104%);
 `;
 
 export const StyledInputError = styled.p`

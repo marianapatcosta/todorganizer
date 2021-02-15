@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { StyledButton, StyledButtonLarge } from "./StyledButton";
 
-const Button = forwardRef(({ disabled, onClick, type, label, large, className }, ref) => {
-  return large ? (
+const Button = forwardRef(({ disabled, onClick, type, label, isLarge, className }, ref) => {
+  return isLarge ? (
     <StyledButtonLarge
       className={className}
       type={type || "button"}

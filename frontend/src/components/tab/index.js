@@ -1,5 +1,5 @@
 import React from "react";
-import { isEventValid } from "../../utils";
+import { isEventValid } from "../../utils/utils";
 import { StyledTab } from "./StyledTab";
 
 const Tab = ({ disabled, isActive, label, onClick, tabClassName }) => {

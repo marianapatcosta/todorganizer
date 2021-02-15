@@ -13,6 +13,7 @@ export const StyledAppSpacer = styled.div`
   width: 100%;
 `;
 
+
 export const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${(props) => props.theme.colors.primary};
@@ -36,7 +37,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   * :focus:not(:focus-visible) {
-    border-color: ${({theme})=> theme.colors.green};
+    border-color: ${({theme})=> theme.colors.highlight};
     outline: none;
   }
 

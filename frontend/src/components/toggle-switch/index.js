@@ -25,7 +25,7 @@ const ToggleSwitch = ({
         disabled={disabled}
         onChange={onChange}
       />
-      {label}
+      {!!label && label}
       <StyledToggleSwitchSlider checked={checked} disabled={disabled}>
         <StyledToggleSwitchLabel disabled={disabled}>
           {checked && leftLabel}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Todo, TodoPlaceholder } from "../../components";
 import {
   statuses,
@@ -10,6 +10,7 @@ import {
   statusConverter,
   KEYBOARD_CODES,
 } from "../../constants";
+import { AuthContext } from "../../context/auth-context";
 import {
   StyledTodosBoardWrapper,
   StyledTodosBoard,
@@ -30,6 +31,7 @@ const {
   ESCAPE_KEY,
 } = KEYBOARD_CODES;
 const TodosBoard = () => {
+  const { authToken } = useContext(AuthContext);
   const [todos, setTodos] = useState([]);
   const [draggedTodo, setDraggedTodo] = useState();
   const [toastData, setToastData] = useState({});
@@ -44,7 +46,12 @@ const TodosBoard = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/todos`
+        `${process.env.REACT_APP_BACKEND_URL}/api/todos`,
+        {
+          headers: {
+            Authorization: `Token ${authToken}`,
+          },
+        }
       );
       const responseData = await response.json();
       setTodos(
@@ -72,7 +79,7 @@ const TodosBoard = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/todos/${draggedTodo.id}/`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/todos/${draggedTodo.id}/`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -81,6 +88,7 @@ const TodosBoard = () => {
           }),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Token ${authToken}`,
           },
         }
       );
