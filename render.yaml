@@ -1,0 +1,19 @@
+services:
+  - name: todorganizer
+    type: web
+    env: python
+    repo: https://github.com/marianapatcosta/todorganizer
+    buildCommand: pip3 install -r requirements.txt && python manage.py migrate --no-input
+    startCommand: ALLOWED_HOSTS=".onrender.com" gunicorn backend.wsgi --log-file -
+    envVars:
+      - key: DATABASE_URL
+        value: postgres://zwigczayugyhhx:5f34ad314aeaba6d30a5f0b671c0a95313b3b78c30bceb01e18f629b347eb755@ec2-54-78-36-245.eu-west-1.compute.amazonaws.com:5432/db9dhc59f40nff
+      - key: DEBUG
+        value: False
+      - key: DISABLE_COLLECTSTATIC
+        value: 1
+      - key: SECRET_KEY
+        value: leww03vke_8e+3fey6$b%z$i*ihc1012t!o&uf_u2#d^7s4*$a
+databases:
+  - name: todorganizer-db
+    ipAllowList: [] # only allow internal connections

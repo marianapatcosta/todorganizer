@@ -6,11 +6,11 @@ const Todos = () => {
   const tabsMetadata = [
     {
       label: "Overview",
-      renderContent: () => <TodosOverview />,
+      renderContent: <TodosOverview />,
     },
     {
       label: "Board",
-      renderContent: () => <TodosBoard />,
+      renderContent: <TodosBoard />,
     },
   ];
   return <Tabs tabsMetadata={tabsMetadata} tabsPurpose="separator" />;

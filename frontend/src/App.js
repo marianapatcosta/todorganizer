@@ -100,6 +100,7 @@ const App = () => {
             <StyledAppSpacer />
             <Header
               title={"ToDOrganizer"}
+              translate="no"
               isDarkTheme={isDarkTheme}
               toggleThemeMode={(event) => setDarkTheme(event.target.checked)}
             />

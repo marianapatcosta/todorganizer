@@ -59,7 +59,7 @@ const Tabs = ({
         aria-labelledby={tabsMetadata[activeTabIndex].label}
       >
         <StyledTabsSpacer />
-        {tabsMetadata[activeTabIndex].renderContent()}
+        {tabsMetadata[activeTabIndex].renderContent}
       </StyledTabsContent>
     </StyledTabs>
   );

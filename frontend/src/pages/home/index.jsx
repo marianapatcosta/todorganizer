@@ -16,7 +16,7 @@ const Home = () => {
   }, [history, setIsLoggingOut]);
 
   return (
-    <StyledHome className="home">
+    <StyledHome>
       <StyledHomeText>
         {isLoggingOut ? "See you soon!" : "Welcome to ToDOrganizer!!!"}
       </StyledHomeText>

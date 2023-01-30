@@ -159,7 +159,7 @@ const Authentication = () => {
       )}
       <StyledAuthentication isLoading={isLoading}>
         {toastData.message && <Toast {...toastData} onClean={setToastData} />}
-        <StyledFormTitle className="page__card-title">
+        <StyledFormTitle >
           {showLogin ? "Login" : "Create Account"}
         </StyledFormTitle>
         <form onSubmit={handleSubmit}>
